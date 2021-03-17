@@ -22,7 +22,7 @@ import java.util.List;
  *
  * <p>This class uses Java AWT.
  * 
- * @version  1.0.1
+ * @version  1.0.1 - MODIFIED VERSION !!!
  * @author   Vulcalien
  */
 public class InputHandler implements KeyListener,
@@ -59,6 +59,13 @@ public class InputHandler implements KeyListener,
 		component.addMouseListener(this);
 		component.addMouseMotionListener(this);
 		component.addFocusListener(this);
+	}
+
+	public void remove(Component component) {
+		component.removeKeyListener(this);
+		component.removeMouseListener(this);
+		component.removeMouseMotionListener(this);
+		component.removeFocusListener(this);
 	}
 
 	/**

@@ -14,7 +14,7 @@ import vulc.engine.level.tile.Tile;
 public class Level {
 
 	// Tile size: the number of pixels per tile
-	public static final int T_SIZE = 32;
+	public static final int T_SIZE = 64;
 
 	public final Game game;
 
