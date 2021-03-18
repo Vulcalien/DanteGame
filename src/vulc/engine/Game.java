@@ -12,6 +12,7 @@ import vulc.engine.gfx.Screen;
 import vulc.engine.input.InputHandler;
 import vulc.engine.input.KeyBindings;
 import vulc.engine.level.Level;
+import vulc.engine.level.entity.Player;
 
 public abstract class Game {
 
@@ -33,8 +34,11 @@ public abstract class Game {
 	public static final InputHandler INPUT = new InputHandler();
 
 	public static Level level;
+	public static Player player;
 
 	private static void init() {
+		level = new Level(20, 12);
+		level.addEntity(player = new Player());
 	}
 
 	public static void tick() {
@@ -53,11 +57,9 @@ public abstract class Game {
 		screen.clear(0x000000);
 
 		if(level != null) {
-			level.render(screen, 10, 10);
+			// the screen is 20x11.25 tiles
+			level.render(screen, 21, 13);
 		}
-
-		screen.fill(1, 1, 100, 100, 0xff0000);
-		screen.setPixel(WIDTH - 1, HEIGHT - 1, 0xffffff);
 	}
 
 	private static void createFrame(boolean isFullScreen) {

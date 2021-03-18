@@ -16,17 +16,14 @@ public class Level {
 	// Tile size: the number of pixels per tile
 	public static final int T_SIZE = 64;
 
-	public final Game game;
-
 	public final int width, height;
 	public final byte[] tiles;
+
 	public final List<Entity> entities = new ArrayList<Entity>();
 	public final List<Entity>[] entitiesInTile;
 
 	@SuppressWarnings("unchecked")
-	public Level(Game game, int width, int height) {
-		this.game = game;
-
+	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
 
@@ -63,7 +60,8 @@ public class Level {
 	}
 
 	public void render(Screen screen, int xTiles, int yTiles) {
-		// TODO set screen's offset
+		screen.setOffset(Game.player.x - screen.width / 2,
+		                 Game.player.y - screen.height / 2);
 
 		int xt0 = posToTile(screen.xOffset);
 		int yt0 = posToTile(screen.yOffset);

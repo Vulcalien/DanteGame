@@ -38,7 +38,6 @@ public abstract class Entity {
 			Entity e = touchedEntities.get(i);
 			e.touchedBy(this);
 		}
-
 		return new boolean[] {xMoved, yMoved};
 	}
 

@@ -28,4 +28,8 @@ public class Screen extends IntBitmap {
 		draw(sprite, x - xOffset, y - yOffset);
 	}
 
+	public void writeOffset(String text, int color, int x, int y) {
+		write(text, color, x - xOffset, y - yOffset);
+	}
+
 }

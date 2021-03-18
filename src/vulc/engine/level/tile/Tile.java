@@ -13,6 +13,8 @@ public abstract class Tile {
 
 	public final byte id;
 
+	public static final Tile STONE_FLOOR = new StoneFloor(0);
+
 	public Tile(int id) {
 		this.id = (byte) id;
 		if(TILES[id] != null) {
