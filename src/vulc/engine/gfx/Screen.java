@@ -16,6 +16,7 @@ public class Screen extends IntBitmap {
 	public Screen(int width, int height, int[] pixels) {
 		super(width, height, pixels);
 
+		setTransparent(0xff00ff);
 		setFont(FONT);
 	}
 

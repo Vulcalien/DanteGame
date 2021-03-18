@@ -1,7 +1,6 @@
 package vulc.engine.level.entity;
 
 import vulc.bitmap.Bitmap;
-import vulc.bitmap.IntBitmap;
 import vulc.engine.gfx.Screen;
 import vulc.engine.gfx.sprite.Atlas;
 import vulc.engine.input.KeyBindings;
@@ -31,8 +30,6 @@ public class Player extends Mob {
 	}
 
 	public void render(Screen screen) {
-		screen.renderSprite(new IntBitmap(xr * 2, yr * 2, 0xff0000), x - xr, y - yr);
-
 		Bitmap<Integer> sprite;
 		if(moveAnimation == 0) {
 			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 2, 0, 2, 4);
