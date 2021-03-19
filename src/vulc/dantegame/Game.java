@@ -73,7 +73,6 @@ public abstract class Game {
 
 	public static void render(Screen screen) {
 		screen.clear(0x000000);
-		screen.clear(0xffffff);
 
 		if(menu != null) {
 			menu.render(screen);

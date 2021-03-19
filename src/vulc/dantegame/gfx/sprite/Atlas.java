@@ -15,6 +15,8 @@ public final class Atlas {
 
 	public static final int SPRITE_SIZE = 32;
 
+	public static final Bitmap<Integer> START_IMAGE;
+
 	public static final Bitmap<Integer> TILES;
 	public static final Bitmap<Integer> PLAYER;
 
@@ -22,6 +24,8 @@ public final class Atlas {
 		try {
 			TILES = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/atlas.png")));
 			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/player.png")));
+
+			START_IMAGE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/background/start.png")));
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}
