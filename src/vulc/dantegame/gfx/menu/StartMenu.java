@@ -8,7 +8,6 @@ import vulc.dantegame.gfx.sprite.Atlas;
 
 public class StartMenu extends Menu {
 
-	// DEBUG set to 240
 	private static final int UNLOCK_GUI_TIME = 60;
 
 	private static final int GUI_BUTTONS = 3;
@@ -91,6 +90,10 @@ public class StartMenu extends Menu {
 			             screen.height - 80 - (selected == ID_INFO ? selectedBoost : 0));
 
 			screen.setFont(Screen.NORMAL_FONT);
+
+			screen.write("Premi ENTER per iniziare", normalColor, transparency * 2 / 3,
+			             screen.width - screen.getFont().widthOf("Premi ENTER per iniziare") - 5,
+			             screen.height - screen.getFont().getHeight() - 5);
 		}
 	}
 

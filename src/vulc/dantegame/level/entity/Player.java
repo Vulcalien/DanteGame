@@ -8,10 +8,10 @@ import vulc.dantegame.input.KeyBindings;
 public class Player extends Mob {
 
 	public Player() {
-		xr = 32;
-		yr = 64;
+		xr = 48;
+		yr = 92;
 
-		x = 60;
+		x = 100;
 		y = 150;
 	}
 
@@ -37,7 +37,8 @@ public class Player extends Mob {
 			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 10) % 4)) * 8, 4, 8);
 		}
 
-		screen.renderSprite(sprite, x - sprite.width / 2, y - sprite.height / 2);
+		// shifted by 32 pixels in y-axix
+		screen.renderSprite(sprite, x - sprite.width / 2, y - sprite.height / 2 - 32);
 		screen.writeOffset(dir + "", 0x00ff00, x, y - 100);
 	}
 
