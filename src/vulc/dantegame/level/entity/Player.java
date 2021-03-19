@@ -32,9 +32,9 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		Bitmap<Integer> sprite;
 		if(moveAnimation == 0) {
-			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 2, 0, 2, 4);
+			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 4, 0, 4, 8);
 		} else {
-			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 2, (1 + ((moveAnimation / 10) & 1)) * 4, 2, 4);
+			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 10) % 4)) * 8, 4, 8);
 		}
 
 		screen.renderSprite(sprite, x - sprite.width / 2, y - sprite.height / 2);

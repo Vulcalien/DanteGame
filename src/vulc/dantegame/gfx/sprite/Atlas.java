@@ -23,7 +23,7 @@ public final class Atlas {
 	static {
 		try {
 			TILES = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/atlas.png")));
-			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/player.png")));
+			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/dante.png")));
 
 			START_IMAGE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/background/start.png")));
 		} catch(IOException e) {
