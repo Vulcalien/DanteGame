@@ -1,7 +1,7 @@
 /*
  * This code is licensed under MIT License by Vulcalien (see LICENSE)
  */
-package vulc.engine;
+package vulc.dantegame;
 
 public class GameLoop {
 

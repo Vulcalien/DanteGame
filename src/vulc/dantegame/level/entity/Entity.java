@@ -1,13 +1,13 @@
 /*******************************************************************************
  * This code or part of it is licensed under MIT License by Vulcalien
  ******************************************************************************/
-package vulc.engine.level.entity;
+package vulc.dantegame.level.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import vulc.engine.gfx.Screen;
-import vulc.engine.level.Level;
+import vulc.dantegame.gfx.Screen;
+import vulc.dantegame.level.Level;
 
 public abstract class Entity {
 

@@ -1,9 +1,9 @@
 /*******************************************************************************
  * This code or part of it is licensed under MIT License by Vulcalien
  ******************************************************************************/
-package vulc.engine.level.entity.particle;
+package vulc.dantegame.level.entity.particle;
 
-import vulc.engine.level.entity.Entity;
+import vulc.dantegame.level.entity.Entity;
 
 public abstract class Particle extends Entity {
 

@@ -2,7 +2,7 @@
  * Copyright 2019-2020 Vulcalien
  * This code is licensed under MIT License by Vulcalien (see LICENSE)
  */
-package vulc.engine.input;
+package vulc.dantegame.input;
 
 import java.awt.Component;
 import java.awt.event.FocusEvent;

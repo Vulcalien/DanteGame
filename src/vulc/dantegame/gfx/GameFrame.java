@@ -1,7 +1,7 @@
 /*
  * This code is licensed under MIT License by Vulcalien (see LICENSE)
  */
-package vulc.engine.gfx;
+package vulc.dantegame.gfx;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -17,7 +17,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import vulc.engine.Game;
+import vulc.dantegame.Game;
 
 public class GameFrame extends Frame {
 

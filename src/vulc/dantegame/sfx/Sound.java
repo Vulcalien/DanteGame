@@ -1,7 +1,7 @@
 /*******************************************************************************
  * This code or part of it is licensed under MIT License by Vulcalien
  ******************************************************************************/
-package vulc.engine.sfx;
+package vulc.dantegame.sfx;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

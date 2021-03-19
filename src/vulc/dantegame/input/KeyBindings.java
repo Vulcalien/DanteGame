@@ -1,8 +1,8 @@
-package vulc.engine.input;
+package vulc.dantegame.input;
 
 import java.awt.event.KeyEvent;
 
-import vulc.engine.Game;
+import vulc.dantegame.Game;
 
 public final class KeyBindings {
 	private KeyBindings() {
@@ -19,5 +19,8 @@ public final class KeyBindings {
 	public static final InputHandler.Key LEFT = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_LEFT);
 	public static final InputHandler.Key DOWN = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_DOWN);
 	public static final InputHandler.Key RIGHT = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_RIGHT);
+
+	public static final InputHandler.Key ENTER = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ENTER);
+	public static final InputHandler.Key SPACE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_SPACE);
 
 }

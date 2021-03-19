@@ -1,9 +1,9 @@
-package vulc.engine.level.entity;
+package vulc.dantegame.level.entity;
 
 import vulc.bitmap.Bitmap;
-import vulc.engine.gfx.Screen;
-import vulc.engine.gfx.sprite.Atlas;
-import vulc.engine.input.KeyBindings;
+import vulc.dantegame.gfx.Screen;
+import vulc.dantegame.gfx.sprite.Atlas;
+import vulc.dantegame.input.KeyBindings;
 
 public class Player extends Mob {
 
@@ -37,7 +37,7 @@ public class Player extends Mob {
 			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 2, (1 + ((moveAnimation / 10) & 1)) * 4, 2, 4);
 		}
 
-		screen.renderSprite(sprite, x - xr, y - yr);
+		screen.renderSprite(sprite, x - sprite.width / 2, y - sprite.height / 2);
 		screen.writeOffset(dir + "", 0x00ff00, x, y - 100);
 	}
 

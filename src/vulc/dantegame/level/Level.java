@@ -1,15 +1,15 @@
 /*******************************************************************************
  * This code or part of it is licensed under MIT License by Vulcalien
  ******************************************************************************/
-package vulc.engine.level;
+package vulc.dantegame.level;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import vulc.engine.Game;
-import vulc.engine.gfx.Screen;
-import vulc.engine.level.entity.Entity;
-import vulc.engine.level.tile.Tile;
+import vulc.dantegame.Game;
+import vulc.dantegame.gfx.Screen;
+import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.tile.Tile;
 
 public class Level {
 

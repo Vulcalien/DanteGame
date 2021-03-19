@@ -1,7 +1,7 @@
 /*******************************************************************************
  * This code or part of it is licensed under MIT License by Vulcalien
  ******************************************************************************/
-package vulc.engine.gfx;
+package vulc.dantegame.gfx;
 
 import vulc.bitmap.Bitmap;
 import vulc.bitmap.IntBitmap;
@@ -9,7 +9,10 @@ import vulc.bitmap.font.Font;
 
 public class Screen extends IntBitmap {
 
-	public static final Font FONT = new Font(Screen.class.getResourceAsStream("/fonts/tinyfont.fv4"));
+	public static final Font SMALL_FONT = new Font(Screen.class.getResourceAsStream("/fonts/tinyfont.fv4"));
+	public static final Font NORMAL_FONT = SMALL_FONT.getScaled(2);
+	public static final Font BIG_FONT = SMALL_FONT.getScaled(4);
+	public static final Font BIGGER_FONT = SMALL_FONT.getScaled(6);
 
 	public int xOffset = 0, yOffset = 0;
 
@@ -17,7 +20,17 @@ public class Screen extends IntBitmap {
 		super(width, height, pixels);
 
 		setTransparent(0xff00ff);
-		setFont(FONT);
+		setFont(NORMAL_FONT);
+	}
+
+	public Bitmap<Integer> getCopy() {
+		Bitmap<Integer> result = new IntBitmap(width, height);
+
+		int size = size();
+		for(int i = 0; i < size; i++) {
+			result.raster.setPixel(i, raster.getPixel(i));
+		}
+		return result;
 	}
 
 	public void setOffset(int x, int y) {
