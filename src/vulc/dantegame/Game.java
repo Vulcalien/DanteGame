@@ -10,7 +10,6 @@ package vulc.dantegame;
 import vulc.dantegame.gfx.GameFrame;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.Menu;
-import vulc.dantegame.gfx.menu.StartMenu;
 import vulc.dantegame.input.InputHandler;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
@@ -46,11 +45,12 @@ public abstract class Game {
 
 	private static void init() {
 		// testing stuff
-		level = new Level(20, 12);
+		level = new Level("test-level.bvdf");
+//		level = new Level(20, 12);
 		level.addEntity(player = new Player());
 
 		// DEBUG uncomment this
-		menu = new StartMenu();
+//		menu = new StartMenu();
 
 		level.addEntity(new RollingRock(200, 100, -1, 0));
 		level.addEntity(new MovingPlatform(1, 3, 10, new int[] {

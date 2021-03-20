@@ -1,0 +1,8 @@
+- labirinto
+  - rocce rotolanti
+  - piattaforme mobili
+  - ostacoli che rallentano (da specificare)
+    - ci si può curare con piante di giunco
+  - si deve prima parlare al personaggio principale, poi bisogna andare al prossimo livello
+  - bonus che contengono parti del canto
+  - bonus (?) anime incontrate (?)

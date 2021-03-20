@@ -9,10 +9,11 @@ public class Player extends Mob {
 
 	public Player() {
 		xr = 48;
-		yr = 92;
+		yr = 48;
 
+		// DEBUG
 		x = 100;
-		y = 150;
+		y = 350;
 	}
 
 	public void tick() {
@@ -31,15 +32,17 @@ public class Player extends Mob {
 
 	public void render(Screen screen) {
 		int xDst = x - Atlas.spriteSize(4) / 2 - screen.xOffset;
-		int yDst = y - Atlas.spriteSize(8) / 2 - 32 - screen.yOffset; // shifted by 32 pixels in y-axix
+		int yDst = y - Atlas.spriteSize(8) / 2 - 80 - screen.yOffset; // player is shifted by 80 pixels in y-axix
 
 		if(moveAnimation == 0) {
-			Atlas.drawSprite(Atlas.PLAYER, dir * 4, 0, 4, 8,
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, 0, 4, 8,
 			                 screen, xDst, yDst);
 		} else {
-			Atlas.drawSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
+			// DEBUG remove * 0 + 8 to enable direction
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
 			                 screen, xDst, yDst);
 		}
+		screen.setPixel(screen.width / 2, screen.height / 2, 0xffffff);
 	}
 
 	public boolean isBlockedBy(Entity e) {

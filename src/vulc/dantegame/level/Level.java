@@ -3,6 +3,7 @@
  ******************************************************************************/
 package vulc.dantegame.level;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.tile.Tile;
+import vulc.vdf.VDFObject;
+import vulc.vdf.io.binary.BinaryVDF;
 
 public class Level {
 
@@ -28,6 +31,25 @@ public class Level {
 		this.height = height;
 
 		this.tiles = new byte[width * height];
+		this.entitiesInTile = new ArrayList[width * height];
+		for(int i = 0; i < entitiesInTile.length; i++) {
+			entitiesInTile[i] = new ArrayList<Entity>();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Level(String filename) {
+		VDFObject obj = null;
+		try {
+			obj = (VDFObject) BinaryVDF.deserialize(Level.class.getResourceAsStream("/levels/" + filename));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		this.tiles = obj.getByteArray("tiles");
+
+		this.width = obj.getInt("mapWidth");
+		this.height = tiles.length / width;
+
 		this.entitiesInTile = new ArrayList[width * height];
 		for(int i = 0; i < entitiesInTile.length; i++) {
 			entitiesInTile[i] = new ArrayList<Entity>();
@@ -61,7 +83,7 @@ public class Level {
 
 	public void render(Screen screen, int xTiles, int yTiles) {
 		screen.setOffset(Game.player.x - screen.width / 2,
-		                 Game.player.y - screen.height / 2);
+		                 Game.player.y - 80 - screen.height / 2); // player is shifted by 80 pixels in y-axix
 
 		int xt0 = posToTile(screen.xOffset);
 		int yt0 = posToTile(screen.yOffset);

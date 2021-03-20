@@ -14,6 +14,7 @@ sourceSets {
 
 dependencies {
     implementation files('lib/Bitmap-Utility-1.2.0-wip.jar')
+    implementation files('lib/VulcDataFormat-2.0.0.jar')
 }
 
 task source(type: Jar, dependsOn: classes) {

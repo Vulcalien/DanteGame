@@ -10,3 +10,10 @@
 
 /.gradle/
 /build/
+
+
+### VulcEngine-MapMaker ###
+/VulcEngine-MapMaker-*.jar
+/mapmaker-config.vdf
+/mapfile.bvdf
+/mapmaker_autosave.bvdf
