@@ -14,7 +14,9 @@ import vulc.dantegame.gfx.menu.StartMenu;
 import vulc.dantegame.input.InputHandler;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
-import vulc.dantegame.level.entity.Player;
+import vulc.dantegame.level.entity.mob.MovingPlatform;
+import vulc.dantegame.level.entity.mob.Player;
+import vulc.dantegame.level.entity.mob.RollingRock;
 import vulc.dantegame.level.tile.Tile;
 
 public abstract class Game {
@@ -47,7 +49,13 @@ public abstract class Game {
 		level = new Level(20, 12);
 		level.addEntity(player = new Player());
 
+		// DEBUG uncomment this
 		menu = new StartMenu();
+
+		level.addEntity(new RollingRock(200, 100, -1, 0));
+		level.addEntity(new MovingPlatform(1, 3, 10, new int[] {
+		    1, 3, 6, 8, 9, 1
+		}));
 	}
 
 	public static void tick() {

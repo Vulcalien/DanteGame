@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -26,6 +28,8 @@ public class GameFrame extends Frame {
 	public final Canvas canvas = new Canvas();
 
 	private final Screen screen;
+
+	private int xRend, yRend, wRend, hRend;
 
 	private final BufferedImage img;
 	protected final int[] pixels;
@@ -56,8 +60,17 @@ public class GameFrame extends Frame {
 				System.exit(0);
 			};
 		});
+		addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				calculateRenderValues();
+			}
+		});
 
 		if(isFullScreen) {
+			// Windows 10 needs this
+			setUndecorated(true);
+
+			// While Linux (tested Debian GNOME) needs this
 			GraphicsDevice d = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 			d.setFullScreenWindow(this);
 		}
@@ -77,6 +90,8 @@ public class GameFrame extends Frame {
 		setLocationRelativeTo(null);
 
 		canvas.requestFocus();
+
+		calculateRenderValues();
 	}
 
 	public void render() {
@@ -88,29 +103,30 @@ public class GameFrame extends Frame {
 
 		Game.render(screen);
 
-		Dimension size = canvas.getSize();
-
-		// TODO consider calculating these values only when necessary (when the frame is resized)
-		int rendx = 0;
-		int rendy = 0;
-
-		int rendWidth = size.width;
-		int rendHeight = size.height;
-
-		// check what has the lowest scale
-		if(1.0 * rendWidth / Game.WIDTH > 1.0 * rendHeight / Game.HEIGHT) {
-			rendWidth = (int) (rendHeight * Game.SCREEN_RATIO);
-		} else {
-			rendHeight = (int) (1.0 * rendWidth / Game.SCREEN_RATIO);
-		}
-
-		rendx = (size.width - rendWidth) / 2;
-		rendy = (size.height - rendHeight) / 2;
-
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(img, rendx, rendy, rendWidth, rendHeight, null);
+		g.drawImage(img, xRend, yRend, wRend, hRend, null);
 		g.dispose();
 		bs.show();
+	}
+
+	public void calculateRenderValues() {
+		Dimension size = canvas.getSize();
+
+		xRend = 0;
+		yRend = 0;
+
+		wRend = size.width;
+		hRend = size.height;
+
+		// check what has the lowest scale
+		if(1.0 * wRend / Game.WIDTH > 1.0 * hRend / Game.HEIGHT) {
+			wRend = (int) (hRend * Game.SCREEN_RATIO);
+		} else {
+			hRend = (int) (1.0 * wRend / Game.SCREEN_RATIO);
+		}
+
+		xRend = (size.width - wRend) / 2;
+		yRend = (size.height - hRend) / 2;
 	}
 
 	public void initFrame() {

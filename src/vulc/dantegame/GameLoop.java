@@ -63,7 +63,7 @@ public class GameLoop {
 			}
 
 			try {
-				Thread.sleep(4);
+				Thread.sleep(2);
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}

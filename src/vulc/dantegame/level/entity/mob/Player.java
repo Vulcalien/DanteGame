@@ -1,9 +1,9 @@
-package vulc.dantegame.level.entity;
+package vulc.dantegame.level.entity.mob;
 
-import vulc.bitmap.Bitmap;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.KeyBindings;
+import vulc.dantegame.level.entity.Entity;
 
 public class Player extends Mob {
 
@@ -30,16 +30,21 @@ public class Player extends Mob {
 	}
 
 	public void render(Screen screen) {
-		Bitmap<Integer> sprite;
-		if(moveAnimation == 0) {
-			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 4, 0, 4, 8);
-		} else {
-			sprite = Atlas.getSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 10) % 4)) * 8, 4, 8);
-		}
+		int xDst = x - Atlas.spriteSize(4) / 2 - screen.xOffset;
+		int yDst = y - Atlas.spriteSize(8) / 2 - 32 - screen.yOffset; // shifted by 32 pixels in y-axix
 
-		// shifted by 32 pixels in y-axix
-		screen.renderSprite(sprite, x - sprite.width / 2, y - sprite.height / 2 - 32);
-		screen.writeOffset(dir + "", 0x00ff00, x, y - 100);
+		if(moveAnimation == 0) {
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4, 0, 4, 8,
+			                 screen, xDst, yDst);
+		} else {
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
+			                 screen, xDst, yDst);
+		}
+	}
+
+	public boolean isBlockedBy(Entity e) {
+		if(e instanceof RollingRock) return true;
+		return false;
 	}
 
 }

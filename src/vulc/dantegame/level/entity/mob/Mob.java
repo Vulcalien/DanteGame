@@ -1,4 +1,6 @@
-package vulc.dantegame.level.entity;
+package vulc.dantegame.level.entity.mob;
+
+import vulc.dantegame.level.entity.Entity;
 
 public class Mob extends Entity {
 

@@ -11,8 +11,7 @@ public class StoneFloor extends Tile {
 	}
 
 	public void render(Screen screen, Level level, int xt, int yt) {
-		screen.renderSprite(Atlas.getTile(0, 0), xt * Level.T_SIZE, yt * Level.T_SIZE);
-//		screen.renderSprite(new IntBitmap(64, 64, 0x888888), xt * Level.T_SIZE, yt * Level.T_SIZE);
+		Atlas.drawTile(0, 0, screen, Level.tileToPos(xt) - screen.xOffset, Level.tileToPos(yt) - screen.yOffset);
 	}
 
 }
