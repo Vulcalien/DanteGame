@@ -8,8 +8,11 @@ public class Mob extends Entity {
 	public int moveAnimation = 0;
 
 	public boolean[] move(int xm, int ym) {
-		boolean[] result = super.move(xm, ym);
+		calculateDirAndMoveAnimation(xm, ym);
+		return super.move(xm, ym);
+	}
 
+	protected void calculateDirAndMoveAnimation(int xm, int ym) {
 		if(xm != 0 || ym != 0) {
 			if(xm < 0) dir = 1;
 			else if(xm > 0) dir = 3;
@@ -21,7 +24,6 @@ public class Mob extends Entity {
 		} else {
 			moveAnimation = 0;
 		}
-		return result;
 	}
 
 }

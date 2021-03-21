@@ -95,7 +95,7 @@ public class Level {
 
 	public void render(Screen screen, int xTiles, int yTiles) {
 		screen.setOffset(Game.player.x - screen.width / 2,
-		                 Game.player.y - 80 - screen.height / 2); // player is shifted by 80 pixels in y-axix
+		                 Game.player.y - 112 - screen.height / 2); // player is shifted by 112 pixels in y-axix
 
 		int xt0 = posToTile(screen.xOffset);
 		int yt0 = posToTile(screen.yOffset);

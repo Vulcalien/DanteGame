@@ -17,6 +17,9 @@ public class MovingPlatform extends Mob {
 
 		this.speed = speed;
 		this.spots = spots;
+
+		xr = 48;
+		yr = 48;
 	}
 
 	public void tick() {

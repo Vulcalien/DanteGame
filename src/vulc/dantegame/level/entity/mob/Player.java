@@ -13,8 +13,8 @@ import vulc.dantegame.level.tile.Tile;
 public class Player extends Mob {
 
 	public Player() {
-		xr = 48;
-		yr = 48;
+		xr = 32;
+		yr = 32;
 
 		// DEBUG
 		x = 100;
@@ -29,10 +29,10 @@ public class Player extends Mob {
 		int xt1 = Level.posToTile(x + xr - 1);
 		int yt1 = Level.posToTile(y + yr - 1);
 
-		List<Entity> inTile = level.getEntitiesInTile(xt0, yt0, xt1, yt1);
+		List<Entity> inTile = level.getEntitiesInTile(xt0 - 1, yt0 - 1, xt1 + 1, yt1 + 1);
 		MovingPlatform platform = null;
 		for(Entity e : inTile) {
-			if(e instanceof MovingPlatform) {
+			if(e instanceof MovingPlatform && e.touches(this)) {
 				platform = (MovingPlatform) e;
 				break;
 			}
@@ -58,19 +58,26 @@ public class Player extends Mob {
 
 		// do not accept movement input when there is an overlay
 		if(Game.overlay == null) {
+			// xm and ym requested by input
+			int xmIn = 0, ymIn = 0;
 			int speed = 4;
 
-			if(KeyBindings.W.down() || KeyBindings.UP.down()) ym -= speed;
-			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xm -= speed;
-			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ym += speed;
-			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xm += speed;
+			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= speed;
+			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= speed;
+			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ymIn += speed;
+			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xmIn += speed;
+
+			super.calculateDirAndMoveAnimation(xmIn, ymIn);
+
+			xm += xmIn;
+			ym += ymIn;
 		}
 		move(xm, ym);
 	}
 
 	public void render(Screen screen) {
 		int xDst = x - Atlas.spriteSize(4) / 2 - screen.xOffset;
-		int yDst = y - Atlas.spriteSize(8) / 2 - 80 - screen.yOffset; // player is shifted by 80 pixels in y-axix
+		int yDst = y - Atlas.spriteSize(8) / 2 - 112 - screen.yOffset; // player is shifted by 112 pixels in y-axix
 
 		if(moveAnimation == 0) {
 			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, 0, 4, 8,
@@ -80,6 +87,14 @@ public class Player extends Mob {
 			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
 			                 screen, xDst, yDst);
 		}
+
+		// uncomment to draw hitbox
+//		screen.setPixel(-screen.xOffset + x - xr, -screen.yOffset + y - yr, 0xffffff);
+//		screen.setPixel(-screen.xOffset + x + xr - 1, -screen.yOffset + y + yr - 1, 0xffffff);
+	}
+
+	protected void calculateDirAndMoveAnimation(int xm, int ym) {
+		// manually calculate (because the player can be moved by a platform)
 	}
 
 	public boolean blocks(Entity e) {
