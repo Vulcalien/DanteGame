@@ -59,7 +59,7 @@ public abstract class Entity {
 		for(int xt = xto0; xt <= xto1; xt++) {
 			for(int yt = yto0; yt <= yto1; yt++) {
 				if(xt < 0 || yt < 0 || xt >= level.width || yt >= level.height
-				   || !level.getTile(xt, yt).mayPass(this, xm, ym, level, xt, yt)) {
+				   || !(level.getTile(xt, yt).mayPass(this, xm, ym, level, xt, yt) || ignoreSolidTiles())) {
 					if(xm != 0) {
 						if(xm < 0) return move2(Level.tileToPos(xt + 1) - x0, 0, touchedEntities);
 						else return move2(Level.tileToPos(xt) - x1 - 1, 0, touchedEntities);
@@ -183,6 +183,10 @@ public abstract class Entity {
 
 	public boolean intersects(int x0, int y0, int x1, int y1) {
 		return !(x - xr > x1 || x + xr - 1 < x0 || y - yr > y1 || y + yr - 1 < y0);
+	}
+
+	public boolean ignoreSolidTiles() {
+		return false;
 	}
 
 }

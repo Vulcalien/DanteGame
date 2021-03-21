@@ -53,8 +53,8 @@ public abstract class Game {
 //		menu = new StartMenu();
 
 		level.addEntity(new RollingRock(300, 100, -1, 0));
-		level.addEntity(new MovingPlatform(1, 3, 10, new int[] {
-		    1, 3, 6, 8, 9, 1
+		level.addEntity(new MovingPlatform(0, 5, 2, new int[] {
+		    0, 5, 10, 5
 		}));
 	}
 

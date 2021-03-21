@@ -20,26 +20,37 @@ public class MovingPlatform extends Mob {
 	}
 
 	public void tick() {
-		int xm = 0, ym = 0;
+		move(xmGet(), ymGet());
 
 		int x1 = Level.tileToPos(spots[currentSpot * 2]);
 		int y1 = Level.tileToPos(spots[currentSpot * 2 + 1]);
-
-		if(x < x1) xm = 1;
-		else if(x > x1) xm = -1;
-
-		if(y < y1) ym = 1;
-		else if(y > y1) ym = -1;
-
-		int xspeed = Math.min(speed, Math.abs(x - x1));
-		int yspeed = Math.min(speed, Math.abs(y - y1));
-
-		move(xm * xspeed, ym * yspeed);
 
 		if(x == x1 && y == y1) {
 			currentSpot++;
 			currentSpot %= spots.length / 2;
 		}
+	}
+
+	public int xmGet() {
+		int xm = 0;
+
+		int x1 = Level.tileToPos(spots[currentSpot * 2]);
+		if(x < x1) xm = 1;
+		else if(x > x1) xm = -1;
+
+		int xspeed = Math.min(speed, Math.abs(x - x1));
+		return xm * xspeed;
+	}
+
+	public int ymGet() {
+		int ym = 0;
+
+		int y1 = Level.tileToPos(spots[currentSpot * 2 + 1]);
+		if(y < y1) ym = 1;
+		else if(y > y1) ym = -1;
+
+		int yspeed = Math.min(speed, Math.abs(y - y1));
+		return ym * yspeed;
 	}
 
 	public void render(Screen screen) {

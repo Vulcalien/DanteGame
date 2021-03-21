@@ -5,12 +5,14 @@ package vulc.dantegame.level;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.TransitionOverlay;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.tile.Tile;
 import vulc.vdf.VDFObject;
@@ -26,6 +28,12 @@ public class Level {
 
 	public final List<Entity> entities = new ArrayList<Entity>();
 	public final List<Entity>[] entitiesInTile;
+
+	public final Comparator<Entity> renderSorter = (e1, e2) -> {
+		// player is always over platform
+		if(e1 instanceof MovingPlatform && e2 instanceof Player) return -1;
+		return 0;
+	};
 
 	public Player player;
 
@@ -105,6 +113,7 @@ public class Level {
 		}
 
 		List<Entity> entities = getEntitiesInTile(xt0 - 1, yt0 - 1, xt1 + 1, yt1 + 1);
+		entities.sort(renderSorter);
 		for(int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}

@@ -1,5 +1,7 @@
 package vulc.dantegame.level.entity.mob;
 
+import java.util.List;
+
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
@@ -20,28 +22,50 @@ public class Player extends Mob {
 	}
 
 	public void tick() {
+		int xm = 0, ym = 0;
+
+		int xt0 = Level.posToTile(x - xr);
+		int yt0 = Level.posToTile(y - yr);
+		int xt1 = Level.posToTile(x + xr - 1);
+		int yt1 = Level.posToTile(y + yr - 1);
+
+		List<Entity> inTile = level.getEntitiesInTile(xt0, yt0, xt1, yt1);
+		MovingPlatform platform = null;
+		for(Entity e : inTile) {
+			if(e instanceof MovingPlatform) {
+				platform = (MovingPlatform) e;
+				break;
+			}
+		}
+		if(platform != null) {
+			xm += platform.xmGet();
+			ym += platform.ymGet();
+		}
+
+		boolean isThereVoid = true;
+		x_for:
+		for(int xt = xt0; xt <= xt1; xt++) {
+			for(int yt = yt0; yt <= yt1; yt++) {
+				if(level.getTile(xt, yt) != Tile.VOID) {
+					isThereVoid = false;
+					break x_for;
+				}
+			}
+		}
+		if(isThereVoid && platform == null) {
+			level.onPlayerDeath();
+		}
+
 		// do not accept movement input when there is an overlay
 		if(Game.overlay == null) {
-
-			int xm = 0;
-			int ym = 0;
-
 			int speed = 4;
 
 			if(KeyBindings.W.down() || KeyBindings.UP.down()) ym -= speed;
 			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xm -= speed;
 			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ym += speed;
 			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xm += speed;
-
-			move(xm, ym);
 		}
-
-		if(level.getTile(Level.posToTile(x - xr), Level.posToTile(y - yr)) == Tile.VOID
-		   && level.getTile(Level.posToTile(x + xr), Level.posToTile(y - yr)) == Tile.VOID
-		   && level.getTile(Level.posToTile(x - xr), Level.posToTile(y + yr)) == Tile.VOID
-		   && level.getTile(Level.posToTile(x + xr), Level.posToTile(y + yr)) == Tile.VOID) {
-			level.onPlayerDeath();
-		}
+		move(xm, ym);
 	}
 
 	public void render(Screen screen) {
