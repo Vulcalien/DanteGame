@@ -23,4 +23,8 @@ public abstract class Particle extends Entity {
 		if(remainingTime == 0) remove();
 	}
 
+	public void resetRemainingTime() {
+		this.remainingTime = lifeTime;
+	}
+
 }

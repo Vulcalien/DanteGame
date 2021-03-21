@@ -11,6 +11,7 @@ public class Screen extends IntBitmap {
 
 	public static final Font SMALL_FONT = new Font(Screen.class.getResourceAsStream("/fonts/tinyfont.fv4"));
 	public static final Font NORMAL_FONT = SMALL_FONT.getScaled(2);
+	public static final Font FONT_X3 = SMALL_FONT.getScaled(3);
 	public static final Font BIG_FONT = SMALL_FONT.getScaled(4);
 	public static final Font BIGGER_FONT = SMALL_FONT.getScaled(6);
 

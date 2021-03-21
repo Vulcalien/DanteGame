@@ -37,6 +37,7 @@ public class StartMenu extends Menu {
 							Game.menu = null;
 							// TODO start level 1
 						});
+						starting = true;
 						break;
 				}
 			}

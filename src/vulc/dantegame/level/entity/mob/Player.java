@@ -8,6 +8,7 @@ import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.tile.Tile;
 
 public class Player extends Mob {
@@ -103,6 +104,7 @@ public class Player extends Mob {
 
 	public boolean isBlockedBy(Entity e) {
 		if(e instanceof RollingRock) return true;
+		if(e instanceof StoneWithInfo) return true;
 		return false;
 	}
 

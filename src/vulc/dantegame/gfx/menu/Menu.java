@@ -8,4 +8,12 @@ public abstract class Menu {
 
 	public abstract void render(Screen screen);
 
+	public boolean preventsLevelTick() {
+		return true;
+	}
+
+	public boolean preventsLevelRender() {
+		return true;
+	}
+
 }

@@ -30,7 +30,7 @@ public class Tile {
 	}
 
 	public void render(Screen screen, Level level, int xt, int yt) {
-		Atlas.drawTile(id & 3, id / 8, screen,
+		Atlas.drawTile(id % 8, id / 8, screen,
 		               Level.tileToPos(xt) - screen.xOffset, Level.tileToPos(yt) - screen.yOffset);
 	}
 

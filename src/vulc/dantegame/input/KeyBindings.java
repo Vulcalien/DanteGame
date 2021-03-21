@@ -23,4 +23,6 @@ public final class KeyBindings {
 	public static final InputHandler.Key ENTER = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ENTER);
 	public static final InputHandler.Key SPACE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_SPACE);
 
+	public static final InputHandler.Key ESCAPE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ESCAPE);
+
 }

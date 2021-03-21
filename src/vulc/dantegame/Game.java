@@ -10,9 +10,11 @@ package vulc.dantegame;
 import vulc.dantegame.gfx.GameFrame;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.Menu;
+import vulc.dantegame.gfx.menu.PauseMenu;
 import vulc.dantegame.input.InputHandler;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
+import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.entity.mob.RollingRock;
@@ -44,18 +46,21 @@ public abstract class Game {
 	public static Menu overlay;
 
 	private static void init() {
+		StoneWithInfo.init();
+
 		// testing stuff
 		level = new Level("test-level.bvdf");
-//		level = new Level(20, 12);
 		level.addEntity(player = new Player());
-
-		// DEBUG uncomment this
-//		menu = new StartMenu();
 
 		level.addEntity(new RollingRock(300, 100, -1, 0));
 		level.addEntity(new MovingPlatform(1, 6, 2, new int[] {
 		    1, 6, 10, 6
 		}));
+
+		level.addEntity(new StoneWithInfo(5, 5, ""));
+
+		// DEBUG uncomment this
+//		menu = new StartMenu();
 	}
 
 	public static void tick() {
@@ -63,14 +68,18 @@ public abstract class Game {
 
 		if(menu != null) {
 			menu.tick();
-		} else if(level != null) {
+		} else {
+			if(KeyBindings.ESCAPE.pressed()) {
+				menu = new PauseMenu();
+			}
+		}
+
+		if(level != null && (menu == null || !menu.preventsLevelTick())) {
 			level.tick();
 			Tile.animationTicks++;
 		}
 
-		if(overlay != null) {
-			overlay.tick();
-		}
+		if(overlay != null) overlay.tick();
 
 		// DEBUG
 		if(KeyBindings.DEBUG.released()) {
@@ -82,16 +91,12 @@ public abstract class Game {
 	public static void render(Screen screen) {
 		screen.clear(0x000000);
 
-		if(menu != null) {
-			menu.render(screen);
-		} else if(level != null) {
+		if(level != null && (menu == null || !menu.preventsLevelRender())) {
 			// the screen is 20x11.25 tiles
 			level.render(screen, 21, 13);
 		}
-
-		if(overlay != null) {
-			overlay.render(screen);
-		}
+		if(menu != null) menu.render(screen);
+		if(overlay != null) overlay.render(screen);
 	}
 
 	private static void createFrame(boolean isFullScreen) {

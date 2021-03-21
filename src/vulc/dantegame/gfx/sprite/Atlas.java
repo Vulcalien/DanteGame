@@ -23,6 +23,7 @@ public final class Atlas {
 	public static final Bitmap<Integer> PLAYER;
 	public static final Bitmap<Integer> ROLLING_ROCK;
 	public static final Bitmap<Integer> MOVING_PLATFORM;
+	public static final Bitmap<Integer> STONE_WITH_INFO;
 
 	static {
 		try {
@@ -33,6 +34,8 @@ public final class Atlas {
 			ROLLING_ROCK = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/rolling_rock.png")));
 			MOVING_PLATFORM =
 			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/moving_platform.png")));
+			STONE_WITH_INFO =
+			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/stone_with_info.png")));
 
 			START_IMAGE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/background/start.png")));
 		} catch(IOException e) {

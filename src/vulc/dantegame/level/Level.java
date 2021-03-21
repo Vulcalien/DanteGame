@@ -14,6 +14,7 @@ import vulc.dantegame.gfx.menu.TransitionOverlay;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
+import vulc.dantegame.level.entity.particle.Particle;
 import vulc.dantegame.level.tile.Tile;
 import vulc.vdf.VDFObject;
 import vulc.vdf.io.binary.BinaryVDF;
@@ -32,6 +33,7 @@ public class Level {
 	public final Comparator<Entity> renderSorter = (e1, e2) -> {
 		// player is always over platform
 		if(e1 instanceof MovingPlatform && e2 instanceof Player) return -1;
+		if(e1 instanceof Player && e2 instanceof MovingPlatform) return +1;
 		return 0;
 	};
 
@@ -113,9 +115,15 @@ public class Level {
 		}
 
 		List<Entity> entities = getEntitiesInTile(xt0 - 1, yt0 - 1, xt1 + 1, yt1 + 1);
+		List<Entity> particles = new ArrayList<Entity>();
 		entities.sort(renderSorter);
 		for(int i = 0; i < entities.size(); i++) {
-			entities.get(i).render(screen);
+			Entity e = entities.get(i);
+			if(e instanceof Particle) particles.add(e);
+			else e.render(screen);
+		}
+		for(int i = 0; i < particles.size(); i++) {
+			particles.get(i).render(screen);
 		}
 	}
 
