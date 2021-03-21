@@ -9,7 +9,9 @@ import java.util.List;
 
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
+import vulc.dantegame.gfx.menu.TransitionOverlay;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.tile.Tile;
 import vulc.vdf.VDFObject;
 import vulc.vdf.io.binary.BinaryVDF;
@@ -24,6 +26,8 @@ public class Level {
 
 	public final List<Entity> entities = new ArrayList<Entity>();
 	public final List<Entity>[] entitiesInTile;
+
+	public Player player;
 
 	@SuppressWarnings("unchecked")
 	public Level(int width, int height) {
@@ -117,6 +121,8 @@ public class Level {
 	}
 
 	public void addEntity(Entity e) {
+		if(e instanceof Player) this.player = (Player) e;
+
 		entities.add(e);
 		insertEntityInTile(e, posToTile(e.x), posToTile(e.y));
 		e.removed = false;
@@ -184,6 +190,14 @@ public class Level {
 
 	public static int posToTile(int pos) {
 		return Math.floorDiv(pos, T_SIZE);
+	}
+
+	public void onPlayerDeath() {
+		if(Game.overlay != null) return;
+		Game.overlay = new TransitionOverlay(240, 0x000000, this::onPlayerDeathAction);
+	}
+
+	protected void onPlayerDeathAction() {
 	}
 
 }

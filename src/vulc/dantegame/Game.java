@@ -52,7 +52,7 @@ public abstract class Game {
 		// DEBUG uncomment this
 //		menu = new StartMenu();
 
-		level.addEntity(new RollingRock(200, 100, -1, 0));
+		level.addEntity(new RollingRock(300, 100, -1, 0));
 		level.addEntity(new MovingPlatform(1, 3, 10, new int[] {
 		    1, 3, 6, 8, 9, 1
 		}));
@@ -103,6 +103,9 @@ public abstract class Game {
 	public static void main(String[] args) {
 		createFrame(false);
 		frame.setVisible(true);
+
+		// DEBUG
+		frame.setAlwaysOnTop(true);
 
 		init();
 		GameLoop.start();

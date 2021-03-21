@@ -1,5 +1,6 @@
 package vulc.dantegame.gfx.menu;
 
+import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 
 public class TransitionOverlay extends Menu {
@@ -25,6 +26,8 @@ public class TransitionOverlay extends Menu {
 
 		if(animation == time / 2 && action != null) {
 			action.run();
+		} else if(animation == time) {
+			Game.overlay = null;
 		}
 	}
 
@@ -37,7 +40,6 @@ public class TransitionOverlay extends Menu {
 			transparency = 0xff - (int) (1.0 * 0xff * (animation - time / 2) / time * 2);
 			if(transparency < 0) transparency = 0;
 		}
-
 		screen.fill(0, 0, screen.width - 1, screen.height - 1, color, transparency);
 	}
 

@@ -38,4 +38,8 @@ public class RollingRock extends Mob {
 		return true;
 	}
 
+	public boolean isBlockedBy(Entity e) {
+		return true;
+	}
+
 }

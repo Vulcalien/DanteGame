@@ -1,9 +1,12 @@
 package vulc.dantegame.level.entity.mob;
 
+import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.KeyBindings;
+import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.tile.Tile;
 
 public class Player extends Mob {
 
@@ -17,17 +20,28 @@ public class Player extends Mob {
 	}
 
 	public void tick() {
-		int xm = 0;
-		int ym = 0;
+		// do not accept movement input when there is an overlay
+		if(Game.overlay == null) {
 
-		int speed = 4;
+			int xm = 0;
+			int ym = 0;
 
-		if(KeyBindings.W.down() || KeyBindings.UP.down()) ym -= speed;
-		if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xm -= speed;
-		if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ym += speed;
-		if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xm += speed;
+			int speed = 4;
 
-		move(xm, ym);
+			if(KeyBindings.W.down() || KeyBindings.UP.down()) ym -= speed;
+			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xm -= speed;
+			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ym += speed;
+			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xm += speed;
+
+			move(xm, ym);
+		}
+
+		if(level.getTile(Level.posToTile(x - xr), Level.posToTile(y - yr)) == Tile.VOID
+		   && level.getTile(Level.posToTile(x + xr), Level.posToTile(y - yr)) == Tile.VOID
+		   && level.getTile(Level.posToTile(x - xr), Level.posToTile(y + yr)) == Tile.VOID
+		   && level.getTile(Level.posToTile(x + xr), Level.posToTile(y + yr)) == Tile.VOID) {
+			level.onPlayerDeath();
+		}
 	}
 
 	public void render(Screen screen) {
@@ -42,12 +56,21 @@ public class Player extends Mob {
 			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
 			                 screen, xDst, yDst);
 		}
-		screen.setPixel(screen.width / 2, screen.height / 2, 0xffffff);
+	}
+
+	public boolean blocks(Entity e) {
+		return true;
 	}
 
 	public boolean isBlockedBy(Entity e) {
 		if(e instanceof RollingRock) return true;
 		return false;
+	}
+
+	public void touchedBy(Entity e) {
+		if(e instanceof RollingRock) {
+			level.onPlayerDeath();
+		}
 	}
 
 }
