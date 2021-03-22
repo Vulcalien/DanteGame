@@ -110,11 +110,10 @@ public class Player extends Mob {
 		                    x - shadow.width / 2, y - shadow.height / 2 + 6);
 
 		if(moveAnimation == 0) {
-			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, 0, 4, 8,
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4, 0, 4, 8,
 			                 screen, xDst, yDst);
 		} else {
-			// DEBUG remove * 0 + 8 to enable direction
-			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
+			Atlas.drawSprite(Atlas.PLAYER, dir * 4, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
 			                 screen, xDst, yDst);
 		}
 
