@@ -106,8 +106,8 @@ public class Player extends Mob {
 		int yDst = y - Atlas.spriteSize(8) / 2 - 112 - screen.yOffset; // player is shifted by 112 pixels in y-axix
 
 		// draw shadow
-		screen.renderSprite(shadow, 0x7e,
-		                    x - shadow.width / 2, y - shadow.height / 2 + 6);
+//		screen.renderSprite(shadow, 0x7e,
+//		                    x - shadow.width / 2, y - shadow.height / 2 + 6);
 
 		if(moveAnimation == 0) {
 			Atlas.drawSprite(Atlas.PLAYER, dir * 4, 0, 4, 8,
