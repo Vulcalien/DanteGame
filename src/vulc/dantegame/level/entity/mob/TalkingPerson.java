@@ -14,6 +14,7 @@ public class TalkingPerson extends Mob {
 	public final Bitmap<Integer> spriteAtlas;
 
 	public TextParticle talkParticle;
+	public int talkStadius = -1;
 
 	public TalkingPerson(Bitmap<Integer> atlas, int xt, int yt) {
 		this.spriteAtlas = atlas;
@@ -49,12 +50,20 @@ public class TalkingPerson extends Mob {
 	}
 
 	public void talkToPlayer(Player p) {
-		if(talkParticle != null && !talkParticle.removed) {
-			talkParticle.resetRemainingTime();
-		} else {
-			talkParticle = new TextParticle(-1, x, y - 64, "TEST");
-			level.addEntity(talkParticle);
+		talkStadius++;
+		if(talkStadius > textArray.length) {
+			talkStadius = 0;
+		} else if(talkStadius == textArray.length) {
+			p.isTalking = false;
+
+			if(talkParticle != null) talkParticle.remove();
+			return;
 		}
+		p.isTalking = true;
+		if(talkParticle != null) talkParticle.remove();
+
+		talkParticle = new TextParticle(-1, x, y - 260, textArray[talkStadius]);
+		level.addEntity(talkParticle);
 	}
 
 }

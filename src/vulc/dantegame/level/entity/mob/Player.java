@@ -13,7 +13,7 @@ import vulc.dantegame.level.tile.Tile;
 
 public class Player extends Mob {
 
-	private boolean isTalking = false;
+	public boolean isTalking = false;
 
 	public Player() {
 		xr = 32;
@@ -26,7 +26,7 @@ public class Player extends Mob {
 
 	public void tick() {
 		// interaction
-		if(KeyBindings.E.down() || KeyBindings.ENTER.down() || KeyBindings.SPACE.down()) {
+		if(KeyBindings.E.pressed() || KeyBindings.ENTER.pressed() || KeyBindings.SPACE.pressed()) {
 			int size = 48;
 			int dist = 80;
 
@@ -73,7 +73,7 @@ public class Player extends Mob {
 
 		// do not accept movement input when there is an overlay
 		// or if talking to someone
-		if(Game.overlay == null || isTalking) {
+		if(Game.overlay == null && !isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
 			int speed = 4;
