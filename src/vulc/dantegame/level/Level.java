@@ -51,7 +51,7 @@ public class Level {
 	public Player player;
 
 	@SuppressWarnings("unchecked")
-	private Level(int width, int height) {
+	protected Level(int width, int height) {
 		this.width = width;
 		this.height = height;
 
@@ -63,7 +63,7 @@ public class Level {
 	}
 
 	@SuppressWarnings("unchecked")
-	private Level(int levelID) {
+	protected Level(int levelID) {
 		VDFObject obj = null;
 		try {
 			obj = (VDFObject) BinaryVDF.deserialize(Level.class.getResourceAsStream("/level/level-" + levelID
@@ -243,6 +243,7 @@ public class Level {
 		}
 
 		if(id == 0) return new Level(id);
+		if(id == 1) return new TutorialLevel1(id);
 		else throw new RuntimeException("Level " + id + " is not supported");
 	}
 
