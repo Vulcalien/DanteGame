@@ -43,8 +43,16 @@ public class Screen extends IntBitmap {
 		draw(sprite, x - xOffset, y - yOffset);
 	}
 
+	public void renderSprite(Bitmap<Integer> sprite, int transparency, int x, int y) {
+		draw(sprite, transparency, x - xOffset, y - yOffset);
+	}
+
 	public void writeOffset(String text, int color, int x, int y) {
 		write(text, color, x - xOffset, y - yOffset);
+	}
+
+	public void writeOffset(String text, int color, int transparency, int x, int y) {
+		write(text, color, transparency, x - xOffset, y - yOffset);
 	}
 
 }

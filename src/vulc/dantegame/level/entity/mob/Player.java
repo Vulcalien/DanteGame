@@ -2,6 +2,8 @@ package vulc.dantegame.level.entity.mob;
 
 import java.util.List;
 
+import vulc.bitmap.Bitmap;
+import vulc.bitmap.IntBitmap;
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
@@ -10,8 +12,11 @@ import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.tile.Tile;
+import vulc.util.Geometry;
 
 public class Player extends Mob {
+
+	private Bitmap<Integer> shadow;
 
 	public boolean isTalking = false;
 
@@ -22,6 +27,11 @@ public class Player extends Mob {
 		// DEBUG
 		x = 100;
 		y = 350;
+
+		shadow = new IntBitmap(64, 48);
+		Bitmap<Integer> tmp = new IntBitmap(64, 64, 0xff00ff);
+		Geometry.fillCircle(tmp, 0x000000, 32, 32, 30);
+		shadow = tmp.fGetScaledByDimension(shadow.width, shadow.height);
 	}
 
 	public void tick() {
@@ -94,6 +104,10 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		int xDst = x - Atlas.spriteSize(4) / 2 - screen.xOffset;
 		int yDst = y - Atlas.spriteSize(8) / 2 - 112 - screen.yOffset; // player is shifted by 112 pixels in y-axix
+
+		// draw shadow
+		screen.renderSprite(shadow, 0x7e,
+		                    x - shadow.width / 2, y - shadow.height / 2 + 6);
 
 		if(moveAnimation == 0) {
 			Atlas.drawSprite(Atlas.PLAYER, dir * 4 * 0 + 8, 0, 4, 8,
