@@ -13,9 +13,11 @@ import vulc.dantegame.level.tile.Tile;
 
 public class Player extends Mob {
 
+	private boolean isTalking = false;
+
 	public Player() {
 		xr = 32;
-		yr = 32;
+		yr = 24;
 
 		// DEBUG
 		x = 100;
@@ -23,6 +25,18 @@ public class Player extends Mob {
 	}
 
 	public void tick() {
+		// interaction
+		if(KeyBindings.E.down() || KeyBindings.ENTER.down() || KeyBindings.SPACE.down()) {
+			int size = 48;
+			int dist = 80;
+
+			if(dir == 0) interact(x - size, y - dist - size, x + size, y - dist + size);
+			if(dir == 1) interact(x - dist - size, y - size, x - dist + size, y + size);
+			if(dir == 2) interact(x - size, y + dist - size, x + size, y + dist + size);
+			if(dir == 3) interact(x + dist - size, y - size, x + dist + size, y + size);
+		}
+
+		// movement
 		int xm = 0, ym = 0;
 
 		int xt0 = Level.posToTile(x - xr);
@@ -58,7 +72,8 @@ public class Player extends Mob {
 		}
 
 		// do not accept movement input when there is an overlay
-		if(Game.overlay == null) {
+		// or if talking to someone
+		if(Game.overlay == null || isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
 			int speed = 4;
@@ -89,9 +104,28 @@ public class Player extends Mob {
 			                 screen, xDst, yDst);
 		}
 
-		// uncomment to draw hitbox
+		// hitbox (debug)
 //		screen.setPixel(-screen.xOffset + x - xr, -screen.yOffset + y - yr, 0xffffff);
 //		screen.setPixel(-screen.xOffset + x + xr - 1, -screen.yOffset + y + yr - 1, 0xffffff);
+
+		// interaction (debug)
+//		screen.fill(x0 - screen.xOffset, y0 - screen.yOffset, x1 - screen.xOffset, y1 - screen.yOffset, 0xff00ff, 0x7e);
+	}
+
+	// DEBUG
+	int x0, y0, x1, y1;
+
+	private void interact(int x0, int y0, int x1, int y1) {
+		this.x0 = x0;
+		this.y0 = y0;
+		this.x1 = x1;
+		this.y1 = y1;
+		for(Entity e : level.getEntities(x0, y0, x1, y1)) {
+			if(e instanceof TalkingPerson) {
+				TalkingPerson tp = (TalkingPerson) e;
+				tp.talkToPlayer(this);
+			}
+		}
 	}
 
 	protected void calculateDirAndMoveAnimation(int xm, int ym) {
@@ -105,6 +139,7 @@ public class Player extends Mob {
 	public boolean isBlockedBy(Entity e) {
 		if(e instanceof RollingRock) return true;
 		if(e instanceof StoneWithInfo) return true;
+		if(e instanceof TalkingPerson) return true;
 		return false;
 	}
 

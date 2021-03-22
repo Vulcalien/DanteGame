@@ -17,7 +17,7 @@ public class TextParticle extends Particle {
 
 		screen.fill(-screen.xOffset + x - screen.getFont().widthOf(text) / 2,
 		            -screen.yOffset + y - screen.getFont().getHeight(),
-		            -screen.xOffset + x + screen.getFont().widthOf(text),
+		            -screen.xOffset + x + screen.getFont().widthOf(text) / 2,
 		            -screen.yOffset + y + screen.getFont().getHeight(),
 		            0xffffff);
 		screen.writeOffset(text, 0x000000,

@@ -11,6 +11,7 @@ import vulc.dantegame.gfx.GameFrame;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.Menu;
 import vulc.dantegame.gfx.menu.PauseMenu;
+import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.InputHandler;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
@@ -18,6 +19,7 @@ import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.entity.mob.RollingRock;
+import vulc.dantegame.level.entity.mob.TalkingPerson;
 import vulc.dantegame.level.tile.Tile;
 
 public abstract class Game {
@@ -40,16 +42,15 @@ public abstract class Game {
 	public static final InputHandler INPUT = new InputHandler();
 
 	public static Level level;
+	public static int levelNumber;
 	public static Player player;
 
 	public static Menu menu;
 	public static Menu overlay;
 
 	private static void init() {
-		StoneWithInfo.init();
-
-		// testing stuff
-		level = new Level("test-level.bvdf");
+		// DEBUG testing stuff
+		level = Level.loadLevel(0);
 		level.addEntity(player = new Player());
 
 		level.addEntity(new RollingRock(300, 100, -1, 0));
@@ -58,6 +59,7 @@ public abstract class Game {
 		}));
 
 		level.addEntity(new StoneWithInfo(5, 5, ""));
+		level.addEntity(new TalkingPerson(Atlas.PLAYER, 2, 5));
 
 		// DEBUG uncomment this
 //		menu = new StartMenu();

@@ -27,17 +27,17 @@ public final class Atlas {
 
 	static {
 		try {
-			TILES = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/atlas.png")));
+			TILES = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/atlas.png")));
 
 			// entiites
-			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/dante.png")));
-			ROLLING_ROCK = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/rolling_rock.png")));
+			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/dante.png")));
+			ROLLING_ROCK = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/rolling_rock.png")));
 			MOVING_PLATFORM =
-			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/moving_platform.png")));
+			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/moving_platform.png")));
 			STONE_WITH_INFO =
-			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/stone_with_info.png")));
+			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/stone_with_info.png")));
 
-			START_IMAGE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/images/background/start.png")));
+			START_IMAGE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/background/start.png")));
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}

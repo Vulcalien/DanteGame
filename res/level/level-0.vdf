@@ -1,0 +1,11 @@
+{
+    obj "stone-text": {
+        string "": "DEBUG"
+    },
+    string[] "person-text": [
+        "TEST0",
+        "TEST1",
+        "TEST2",
+        "TEST54",
+    ]
+}

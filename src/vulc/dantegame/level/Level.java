@@ -3,7 +3,11 @@
  ******************************************************************************/
 package vulc.dantegame.level;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,12 +16,15 @@ import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.TransitionOverlay;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
+import vulc.dantegame.level.entity.mob.TalkingPerson;
 import vulc.dantegame.level.entity.particle.Particle;
 import vulc.dantegame.level.tile.Tile;
 import vulc.vdf.VDFObject;
 import vulc.vdf.io.binary.BinaryVDF;
+import vulc.vdf.io.text.TextVDF;
 
 public class Level {
 
@@ -34,13 +41,17 @@ public class Level {
 		// player is always over platform
 		if(e1 instanceof MovingPlatform && e2 instanceof Player) return -1;
 		if(e1 instanceof Player && e2 instanceof MovingPlatform) return +1;
+
+		if(e1.y > e2.y) return +1;
+		else if(e1.y < e2.y) return -1;
+
 		return 0;
 	};
 
 	public Player player;
 
 	@SuppressWarnings("unchecked")
-	public Level(int width, int height) {
+	private Level(int width, int height) {
 		this.width = width;
 		this.height = height;
 
@@ -52,10 +63,11 @@ public class Level {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Level(String filename) {
+	private Level(int levelID) {
 		VDFObject obj = null;
 		try {
-			obj = (VDFObject) BinaryVDF.deserialize(Level.class.getResourceAsStream("/levels/" + filename));
+			obj = (VDFObject) BinaryVDF.deserialize(Level.class.getResourceAsStream("/level/level-" + levelID
+			                                                                        + ".bvdf"));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -215,6 +227,23 @@ public class Level {
 	}
 
 	protected void onPlayerDeathAction() {
+	}
+
+	public static Level loadLevel(int id) {
+		try(InputStream inStream = StoneWithInfo.class.getResourceAsStream("/level/level-" + id + ".vdf")) {
+			Reader in = new InputStreamReader(new BufferedInputStream(inStream));
+
+			VDFObject levelStuff = (VDFObject) TextVDF.deserialize(in);
+			StoneWithInfo.textFile = levelStuff.getObject("stone-text");
+			TalkingPerson.textArray = levelStuff.getStringArray("person-text");
+
+			System.out.println(levelStuff);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+
+		if(id == 0) return new Level(id);
+		else throw new RuntimeException("Level " + id + " is not supported");
 	}
 
 }

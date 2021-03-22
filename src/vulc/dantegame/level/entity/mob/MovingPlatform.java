@@ -18,7 +18,7 @@ public class MovingPlatform extends Mob {
 		this.speed = speed;
 		this.spots = spots;
 
-		xr = 48;
+		xr = 56;
 		yr = 48;
 	}
 
