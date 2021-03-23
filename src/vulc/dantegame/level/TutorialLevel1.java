@@ -1,6 +1,9 @@
 package vulc.dantegame.level;
 
+import vulc.dantegame.gfx.sprite.Atlas;
+import vulc.dantegame.level.entity.ExitDoor;
 import vulc.dantegame.level.entity.mob.Player;
+import vulc.dantegame.level.entity.mob.TalkingPerson;
 import vulc.dantegame.level.tile.Tile;
 
 public class TutorialLevel1 extends Level {
@@ -14,6 +17,7 @@ public class TutorialLevel1 extends Level {
 
 		addEntity(player);
 
+		// DEBUG
 		setTile(Tile.CHECKPOINT, 70, 34);
 		setTile(Tile.CHECKPOINT, 70, 35);
 		setTile(Tile.CHECKPOINT, 71, 34);
@@ -24,14 +28,9 @@ public class TutorialLevel1 extends Level {
 		setTile(Tile.VOID, 66, 35);
 		setTile(Tile.VOID, 66, 36);
 
-		setTile(Tile.DOOR, 66, 40);
-		setTile(Tile.DOOR, 67, 40);
-		setTile(Tile.DOOR, 66, 41);
-		setTile(Tile.DOOR, 67, 41);
-		setTile(Tile.DOOR, 66, 42);
-		setTile(Tile.DOOR, 67, 42);
-		setTile(Tile.DOOR, 66, 43);
-		setTile(Tile.DOOR, 67, 43);
+		addEntity(new ExitDoor(55, 35));
+
+		addEntity(new TalkingPerson(Atlas.PLAYER, 60, 35));
 	}
 
 }

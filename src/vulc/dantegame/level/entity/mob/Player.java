@@ -10,6 +10,7 @@ import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.ExitDoor;
 import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.particle.TextParticle;
 import vulc.dantegame.level.tile.Tile;
@@ -71,31 +72,16 @@ public class Player extends Mob {
 
 		boolean isThereVoid = true;
 		boolean isThereCheckpoint = false;
-		boolean isThereDoor = true;
 
 		for(int xt = xt0; xt <= xt1; xt++) {
 			for(int yt = yt0; yt <= yt1; yt++) {
 				Tile tile = level.getTile(xt, yt);
 				if(tile != Tile.VOID) isThereVoid = false;
 				if(tile == Tile.CHECKPOINT) isThereCheckpoint = true;
-				if(tile != Tile.DOOR) isThereDoor = false;
 			}
 		}
 		if(isThereVoid && platform == null) {
 			level.onPlayerDeath();
-		}
-		if(isThereDoor) {
-			if(hasTalked) {
-				Game.levelNumber++;
-				Level.loadLevel(Game.levelNumber);
-			} else {
-				if(Game.ticks - lastSayNotTalked >= 600) {
-					// TODO find better text
-					level.addEntity(new TextParticle(180, x, y - 256, "Parla prima..."));
-
-					lastSayNotTalked = Game.ticks;
-				}
-			}
 		}
 		if(isThereCheckpoint && Game.ticks - lastSetCheckpointTime >= 300) {
 			setCheckpoint(x, y);
@@ -163,6 +149,18 @@ public class Player extends Mob {
 				tp.talkToPlayer(this);
 
 				hasTalked = true;
+			} else if(e instanceof ExitDoor) {
+				ExitDoor door = (ExitDoor) e;
+				if(hasTalked) {
+					door.open();
+				} else {
+					if(Game.ticks - lastSayNotTalked >= 180) {
+						// TODO find better text
+						level.addEntity(new TextParticle(180, x, y - 256, "Parla prima..."));
+
+						lastSayNotTalked = Game.ticks;
+					}
+				}
 			}
 		}
 	}
@@ -179,12 +177,18 @@ public class Player extends Mob {
 		if(e instanceof RollingRock) return true;
 		if(e instanceof StoneWithInfo) return true;
 		if(e instanceof TalkingPerson) return true;
+		if(e instanceof ExitDoor) return true;
 		return false;
 	}
 
 	public void touchedBy(Entity e) {
 		if(e instanceof RollingRock) {
 			level.onPlayerDeath();
+		} else if(e instanceof ExitDoor) {
+			if(hasTalked) {
+				Game.levelNumber++;
+				Level.loadLevel(Game.levelNumber);
+			}
 		}
 	}
 
