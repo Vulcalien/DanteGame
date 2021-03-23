@@ -43,6 +43,8 @@ public abstract class Game {
 	public static Menu menu;
 	public static Menu overlay;
 
+	public static int ticks = 0;
+
 	private static void init() {
 		level = Level.loadLevel(1);
 		player = level.player;
@@ -63,6 +65,7 @@ public abstract class Game {
 		}
 
 		if(level != null && (menu == null || !menu.preventsLevelTick())) {
+			ticks++;
 			level.tick();
 			Tile.animationTicks++;
 		}

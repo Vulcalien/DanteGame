@@ -227,6 +227,8 @@ public class Level {
 	}
 
 	protected void onPlayerDeathAction() {
+		player.x = player.xCheckpoint;
+		player.y = player.yCheckpoint;
 	}
 
 	public static Level loadLevel(int id) {

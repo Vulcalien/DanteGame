@@ -11,6 +11,7 @@ import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.entity.StoneWithInfo;
+import vulc.dantegame.level.entity.particle.TextParticle;
 import vulc.dantegame.level.tile.Tile;
 import vulc.util.Geometry;
 
@@ -20,13 +21,12 @@ public class Player extends Mob {
 
 	public boolean isTalking = false;
 
+	public int xCheckpoint, yCheckpoint;
+	public int lastSetCheckpointTime = -Integer.MAX_VALUE / 2;
+
 	public Player() {
 		xr = 32;
 		yr = 24;
-
-		// DEBUG
-		x = 100;
-		y = 350;
 
 		shadow = new IntBitmap(64, 48);
 		Bitmap<Integer> tmp = new IntBitmap(64, 64, 0xff00ff);
@@ -68,17 +68,28 @@ public class Player extends Mob {
 		}
 
 		boolean isThereVoid = true;
-		x_for:
+		boolean isThereCheckpoint = false;
+
 		for(int xt = xt0; xt <= xt1; xt++) {
 			for(int yt = yt0; yt <= yt1; yt++) {
-				if(level.getTile(xt, yt) != Tile.VOID) {
+				Tile tile = level.getTile(xt, yt);
+				if(tile != Tile.VOID) {
 					isThereVoid = false;
-					break x_for;
+				}
+				if(tile == Tile.CHECKPOINT) {
+					isThereCheckpoint = true;
 				}
 			}
 		}
 		if(isThereVoid && platform == null) {
 			level.onPlayerDeath();
+		}
+		System.out.println(Game.ticks - lastSetCheckpointTime);
+		if(isThereCheckpoint && Game.ticks - lastSetCheckpointTime >= 300) {
+			setCheckpoint(x, y);
+			level.addEntity(new TextParticle(180, x, y, "Checkpoint impostato"));
+
+			lastSetCheckpointTime = Game.ticks;
 		}
 
 		// do not accept movement input when there is an overlay
@@ -86,12 +97,20 @@ public class Player extends Mob {
 		if(Game.overlay == null && !isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
-			int speed = 4;
+			int speed = 6;
 
-			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= speed;
-			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= speed;
-			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ymIn += speed;
-			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xmIn += speed;
+			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= 1;
+			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= 1;
+			if(KeyBindings.S.down() || KeyBindings.DOWN.down()) ymIn += 1;
+			if(KeyBindings.D.down() || KeyBindings.RIGHT.down()) xmIn += 1;
+
+			if(xmIn != 0 && ymIn != 0) {
+				xmIn *= speed * 2 / 3;
+				ymIn *= speed * 2 / 3;
+			} else {
+				xmIn *= speed;
+				ymIn *= speed;
+			}
 
 			super.calculateDirAndMoveAnimation(xmIn, ymIn);
 
@@ -160,6 +179,11 @@ public class Player extends Mob {
 		if(e instanceof RollingRock) {
 			level.onPlayerDeath();
 		}
+	}
+
+	public void setCheckpoint(int x, int y) {
+		this.xCheckpoint = x;
+		this.yCheckpoint = y;
 	}
 
 }
