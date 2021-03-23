@@ -46,7 +46,7 @@ public abstract class Game {
 	public static int ticks = 0;
 
 	private static void init() {
-		level = Level.loadLevel(1);
+		level = Level.loadLevel(2);
 		player = level.player;
 
 		// DEBUG uncomment this

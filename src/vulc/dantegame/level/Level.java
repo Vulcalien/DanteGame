@@ -126,7 +126,7 @@ public class Level {
 			}
 		}
 
-		List<Entity> entities = getEntitiesInTile(xt0 - 1, yt0 - 1, xt1 + 1, yt1 + 1);
+		List<Entity> entities = getEntitiesInTile(xt0 - 3, yt0 - 3, xt1 + 3, yt1 + 3);
 		List<Entity> particles = new ArrayList<Entity>();
 		entities.sort(renderSorter);
 		for(int i = 0; i < entities.size(); i++) {
@@ -246,6 +246,7 @@ public class Level {
 
 		if(id == 0) return new Level(id);
 		if(id == 1) return new TutorialLevel1(id);
+		if(id == 2) return new Level2(id);
 		else throw new RuntimeException("Level " + id + " is not supported");
 	}
 

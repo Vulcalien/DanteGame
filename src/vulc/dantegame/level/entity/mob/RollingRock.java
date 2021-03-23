@@ -2,7 +2,9 @@ package vulc.dantegame.level.entity.mob;
 
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
+import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.tile.Tile;
 
 public class RollingRock extends Mob {
 
@@ -21,8 +23,21 @@ public class RollingRock extends Mob {
 
 	public void tick() {
 		animation++;
-
 		move(xm, ym);
+
+		int xt0 = Level.posToTile(x - xr);
+		int yt0 = Level.posToTile(y - yr);
+		int xt1 = Level.posToTile(x + xr - 1);
+		int yt1 = Level.posToTile(y + yr - 1);
+
+		boolean isThereVoid = true;
+		for(int xt = xt0; xt <= xt1; xt++) {
+			for(int yt = yt0; yt <= yt1; yt++) {
+				Tile tile = level.getTile(xt, yt);
+				if(tile != Tile.VOID) isThereVoid = false;
+			}
+		}
+		if(isThereVoid) remove();
 	}
 
 	public void render(Screen screen) {

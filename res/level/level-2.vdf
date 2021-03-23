@@ -1,6 +1,6 @@
 {
     obj "stone-text": {
-        string "inizio": ""
+        string "1": "Per correr miglior acque alza le vele\nomai la navicella del mio ingegno,\nche lascia dietro a se' mar si' crudele;"
     },
     string[] "person-text": [
         "TEST0",

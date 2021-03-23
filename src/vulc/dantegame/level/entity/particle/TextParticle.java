@@ -20,17 +20,21 @@ public class TextParticle extends Particle {
 
 		screen.setFont(Screen.FONT_X3);
 
-		int padding = screen.getFont().getHeight() / 3;
+		int padding = screen.getFont().getHeight() / 2;
+		int height = screen.getFont().getHeight();
+		for(int i = 0; i < text.length(); i++) {
+			if(text.charAt(i) == '\n') height += screen.getFont().getHeight();
+		}
 
 		screen.fill(-screen.xOffset + x - screen.getFont().widthOf(text) / 2 - padding,
-		            -screen.yOffset + y - screen.getFont().getHeight() - padding,
-		            -screen.xOffset + x + screen.getFont().widthOf(text) / 2 + padding - 1,
-		            -screen.yOffset + y + screen.getFont().getHeight() + padding - 1,
+		            -screen.yOffset + y - height / 2 - padding,
+		            -screen.xOffset + x + screen.getFont().widthOf(text) / 2 + padding,
+		            -screen.yOffset + y + height / 2 + padding,
 		            0xffffff, transparency * 13 / 16);
 
 		screen.writeOffset(text, 0x000000, transparency,
 		                   x - screen.getFont().widthOf(text) / 2,
-		                   y - screen.getFont().getHeight() / 2);
+		                   y - height / 2);
 
 		screen.setFont(Screen.NORMAL_FONT);
 	}
