@@ -34,7 +34,7 @@ public class StoneWithInfo extends Entity {
 				if(particle != null && !particle.removed) {
 					particle.resetRemainingTime();
 				} else {
-					particle = new TextParticle(300, x, y - 64, text);
+					particle = new TextParticle(150, x, y - 64, text);
 					level.addEntity(particle);
 				}
 			}

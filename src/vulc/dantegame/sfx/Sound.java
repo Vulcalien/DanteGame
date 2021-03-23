@@ -9,11 +9,25 @@ import javax.sound.sampled.Clip;
 
 public class Sound {
 
-	private Clip clip;
+	public static final int TYPE_MUSIC = 0;
+	public static final int TYPE_EFFECT = 1;
 
-	public Sound(String file) {
+	public static final boolean[] CHANNELS = {
+	    true, true
+	};
+
+	public static final Sound THEME = new Sound("theme", TYPE_MUSIC);
+
+	public static final Sound MENU_SOUND = new Sound("menu_sound", TYPE_EFFECT);
+	public static final Sound CHECKPOINT = new Sound("checkpoint", TYPE_EFFECT);
+
+	private Clip clip;
+	private final int type;
+
+	public Sound(String file, int type) {
+		this.type = type;
 		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(Sound.class.getResource(file));
+			AudioInputStream ais = AudioSystem.getAudioInputStream(Sound.class.getResource("/sfx/" + file + ".wav"));
 			Clip clip = AudioSystem.getClip();
 			clip.open(ais);
 			this.clip = clip;
@@ -23,14 +37,14 @@ public class Sound {
 	}
 
 	public void play() {
-		if(clip == null) return;
+		if(clip == null || !CHANNELS[type]) return;
 		if(clip.isRunning()) clip.stop();
 		clip.setFramePosition(0);
 		clip.start();
 	}
 
 	public void loop() {
-		if(clip == null) return;
+		if(clip == null || !CHANNELS[type]) return;
 		if(clip.isRunning()) clip.stop();
 		clip.setFramePosition(0);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -39,6 +53,9 @@ public class Sound {
 	public void stop() {
 		if(clip == null) return;
 		clip.stop();
+	}
+
+	public static void init() {
 	}
 
 }

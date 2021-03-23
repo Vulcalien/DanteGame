@@ -16,6 +16,7 @@ import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.tile.Tile;
+import vulc.dantegame.sfx.Sound;
 
 public abstract class Game {
 
@@ -46,6 +47,11 @@ public abstract class Game {
 	public static int ticks = 0;
 
 	private static void init() {
+		new Thread(() -> {
+			Sound.init();
+			Sound.THEME.loop();
+		}).start();
+
 		level = Level.loadLevel(2);
 		player = level.player;
 

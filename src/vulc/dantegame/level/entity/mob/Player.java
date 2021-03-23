@@ -14,6 +14,7 @@ import vulc.dantegame.level.entity.ExitDoor;
 import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.particle.TextParticle;
 import vulc.dantegame.level.tile.Tile;
+import vulc.dantegame.sfx.Sound;
 import vulc.util.Geometry;
 
 public class Player extends Mob {
@@ -85,6 +86,8 @@ public class Player extends Mob {
 		}
 		if(isThereCheckpoint && Game.ticks - lastSetCheckpointTime >= 300) {
 			setCheckpoint(x, y);
+			Sound.CHECKPOINT.play();
+
 			level.addEntity(new TextParticle(180, x, y - 256, "Checkpoint impostato"));
 
 			lastSetCheckpointTime = Game.ticks;
