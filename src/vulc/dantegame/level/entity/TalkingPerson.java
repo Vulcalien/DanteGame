@@ -1,29 +1,29 @@
-package vulc.dantegame.level.entity.mob;
+package vulc.dantegame.level.entity;
 
 import vulc.bitmap.Bitmap;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.level.Level;
-import vulc.dantegame.level.entity.Entity;
+import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.entity.particle.TextParticle;
 
-public class TalkingPerson extends Mob {
+public class TalkingPerson extends Entity {
 
 	public static String[] textArray;
 
-	public final Bitmap<Integer> spriteAtlas;
+	public final Bitmap<Integer> image;
 
 	public TextParticle talkParticle;
 	public int talkStadius = -1;
 
-	public TalkingPerson(Bitmap<Integer> atlas, int xt, int yt) {
-		this.spriteAtlas = atlas;
-
-		this.x = Level.tileToPos(xt);
-		this.y = Level.tileToPos(yt);
+	public TalkingPerson(Bitmap<Integer> image, int xt, int yt) {
+		this.image = image;
 
 		xr = 32;
 		yr = 24;
+
+		this.x = Level.tileToPos(xt) + xr;
+		this.y = Level.tileToPos(yt) + yr;
 	}
 
 	public void tick() {
@@ -33,13 +33,8 @@ public class TalkingPerson extends Mob {
 		int xDst = x - Atlas.spriteSize(4) / 2 - screen.xOffset;
 		int yDst = y - Atlas.spriteSize(8) / 2 - 112 - screen.yOffset; // player is shifted by 112 pixels in y-axix
 
-		if(moveAnimation == 0) {
-			Atlas.drawSprite(spriteAtlas, dir * 4 * 0 + 8, 0, 4, 8,
-			                 screen, xDst, yDst);
-		} else {
-			Atlas.drawSprite(spriteAtlas, dir * 4, (1 + ((moveAnimation / 8) % 4)) * 8, 4, 8,
-			                 screen, xDst, yDst);
-		}
+		screen.draw(image, xDst, yDst);
+
 		// uncomment to draw hitbox
 //		screen.setPixel(-screen.xOffset + x - xr, -screen.yOffset + y - yr, 0xffffff);
 //		screen.setPixel(-screen.xOffset + x + xr - 1, -screen.yOffset + y + yr - 1, 0xffffff);

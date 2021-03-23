@@ -3,10 +3,10 @@ package vulc.dantegame.level;
 import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.level.entity.ExitDoor;
 import vulc.dantegame.level.entity.StoneWithInfo;
+import vulc.dantegame.level.entity.TalkingPerson;
 import vulc.dantegame.level.entity.mob.MovingPlatform;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.entity.mob.RollingRock;
-import vulc.dantegame.level.entity.mob.TalkingPerson;
 import vulc.dantegame.level.tile.Tile;
 
 public class TutorialLevel1 extends Level {

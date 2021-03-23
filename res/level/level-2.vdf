@@ -1,6 +1,13 @@
 {
     obj "stone-text": {
-        string "1": "Per correr miglior acque alza le vele\nomai la navicella del mio ingegno,\nche lascia dietro a se' mar si' crudele;"
+        string "1": "Per correr miglior acque alza le vele\nomai la navicella del mio ingegno,\nche lascia dietro a se' mar si' crudele",
+        string "2": "Dolce color d'oriental zaffiro,\nche s'accoglieva nel sereno aspetto\ndel mezzo, puro infino al primo giro",
+        string "3": "I' mi volsi a man destra, e puosi mente\na l'altro polo, e vidi quattro stelle\nnon viste mai fuor ch'a la prima gente",
+        string "4": "Com'io da loro sguardo fui partito,\nun poco me volgendo a l'altro polo,\nla' onde il Carro gia' era sparito",
+        string "5": "Lunga la barba e di pel bianco mista\nportava, a' suoi capelli simigliante,\nde' quai cadeva al petto doppia lista",
+        string "6": "Liberta' va cercando, ch'e' si' cara,\ncome sa chi per lei vita rifiuta",
+        string "7": "Noi andavam per lo solingo piano\ncom'om che torna a la perduta strada,\nche 'nfino ad essa li pare ire in vano",
+        string "8": "Venimmo poi in sul lito diserto,\nche mai non vide navicar sue acque\nomo, che di tornar sia poscia esperto"
     },
     string[] "person-text": [
         "TEST0",

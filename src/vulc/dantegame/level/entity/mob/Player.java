@@ -12,6 +12,7 @@ import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.entity.ExitDoor;
 import vulc.dantegame.level.entity.StoneWithInfo;
+import vulc.dantegame.level.entity.TalkingPerson;
 import vulc.dantegame.level.entity.particle.TextParticle;
 import vulc.dantegame.level.tile.Tile;
 import vulc.dantegame.sfx.Sound;
@@ -190,7 +191,12 @@ public class Player extends Mob {
 		} else if(e instanceof ExitDoor) {
 			if(hasTalked) {
 				Game.levelNumber++;
-				Level.loadLevel(Game.levelNumber);
+				try {
+					Level.loadLevel(Game.levelNumber);
+				} catch(RuntimeException ex) {
+					// TODO
+					System.out.println("Game Over");
+				}
 			}
 		}
 	}

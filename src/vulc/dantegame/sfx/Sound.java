@@ -13,7 +13,8 @@ public class Sound {
 	public static final int TYPE_EFFECT = 1;
 
 	public static final boolean[] CHANNELS = {
-	    true, true
+	    // DEBUG true,true
+	    false, true
 	};
 
 	public static final Sound THEME = new Sound("theme", TYPE_MUSIC);
