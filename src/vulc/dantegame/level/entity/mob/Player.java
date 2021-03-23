@@ -20,8 +20,10 @@ public class Player extends Mob {
 	private Bitmap<Integer> shadow;
 
 	public boolean isTalking = false;
+	private boolean hasTalked = false;
 
 	public int xCheckpoint, yCheckpoint;
+	public int lastSayNotTalked = -Integer.MAX_VALUE / 2;
 	public int lastSetCheckpointTime = -Integer.MAX_VALUE / 2;
 
 	public Player() {
@@ -69,25 +71,35 @@ public class Player extends Mob {
 
 		boolean isThereVoid = true;
 		boolean isThereCheckpoint = false;
+		boolean isThereDoor = true;
 
 		for(int xt = xt0; xt <= xt1; xt++) {
 			for(int yt = yt0; yt <= yt1; yt++) {
 				Tile tile = level.getTile(xt, yt);
-				if(tile != Tile.VOID) {
-					isThereVoid = false;
-				}
-				if(tile == Tile.CHECKPOINT) {
-					isThereCheckpoint = true;
-				}
+				if(tile != Tile.VOID) isThereVoid = false;
+				if(tile == Tile.CHECKPOINT) isThereCheckpoint = true;
+				if(tile != Tile.DOOR) isThereDoor = false;
 			}
 		}
 		if(isThereVoid && platform == null) {
 			level.onPlayerDeath();
 		}
-		System.out.println(Game.ticks - lastSetCheckpointTime);
+		if(isThereDoor) {
+			if(hasTalked) {
+				Game.levelNumber++;
+				Level.loadLevel(Game.levelNumber);
+			} else {
+				if(Game.ticks - lastSayNotTalked >= 600) {
+					// TODO find better text
+					level.addEntity(new TextParticle(180, x, y - 256, "Parla prima..."));
+
+					lastSayNotTalked = Game.ticks;
+				}
+			}
+		}
 		if(isThereCheckpoint && Game.ticks - lastSetCheckpointTime >= 300) {
 			setCheckpoint(x, y);
-			level.addEntity(new TextParticle(180, x, y, "Checkpoint impostato"));
+			level.addEntity(new TextParticle(180, x, y - 256, "Checkpoint impostato"));
 
 			lastSetCheckpointTime = Game.ticks;
 		}
@@ -144,18 +156,13 @@ public class Player extends Mob {
 //		screen.fill(x0 - screen.xOffset, y0 - screen.yOffset, x1 - screen.xOffset, y1 - screen.yOffset, 0xff00ff, 0x7e);
 	}
 
-	// DEBUG
-	int x0, y0, x1, y1;
-
 	private void interact(int x0, int y0, int x1, int y1) {
-		this.x0 = x0;
-		this.y0 = y0;
-		this.x1 = x1;
-		this.y1 = y1;
 		for(Entity e : level.getEntities(x0, y0, x1, y1)) {
 			if(e instanceof TalkingPerson) {
 				TalkingPerson tp = (TalkingPerson) e;
 				tp.talkToPlayer(this);
+
+				hasTalked = true;
 			}
 		}
 	}

@@ -111,10 +111,10 @@ public class Level {
 		screen.setOffset(Game.player.x - screen.width / 2,
 		                 Game.player.y - 112 - screen.height / 2); // player is shifted by 112 pixels in y-axix
 
-		int xt0 = posToTile(screen.xOffset);
-		int yt0 = posToTile(screen.yOffset);
-		int xt1 = xt0 + xTiles - 1;
-		int yt1 = yt0 + yTiles - 1;
+		int xt0 = posToTile(screen.xOffset) - 4;
+		int yt0 = posToTile(screen.yOffset) - 4;
+		int xt1 = xt0 + xTiles - 1 + 4;
+		int yt1 = yt0 + yTiles - 1 + 4;
 
 		for(int yt = yt0; yt <= yt1; yt++) {
 			if(yt < 0 || yt >= height) continue;

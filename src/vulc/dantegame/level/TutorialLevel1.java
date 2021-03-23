@@ -23,6 +23,15 @@ public class TutorialLevel1 extends Level {
 		setTile(Tile.VOID, 65, 36);
 		setTile(Tile.VOID, 66, 35);
 		setTile(Tile.VOID, 66, 36);
+
+		setTile(Tile.DOOR, 66, 40);
+		setTile(Tile.DOOR, 67, 40);
+		setTile(Tile.DOOR, 66, 41);
+		setTile(Tile.DOOR, 67, 41);
+		setTile(Tile.DOOR, 66, 42);
+		setTile(Tile.DOOR, 67, 42);
+		setTile(Tile.DOOR, 66, 43);
+		setTile(Tile.DOOR, 67, 43);
 	}
 
 }
