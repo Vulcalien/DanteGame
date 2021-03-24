@@ -30,7 +30,7 @@ public abstract class Game {
 
 	public static final double SCREEN_RATIO = 1.0 * WIDTH / HEIGHT;
 
-	public static final String GAME_NAME = "The Game of Dante";
+	public static final String GAME_NAME = "Dante's Game";
 
 	protected static GameFrame frame;
 
