@@ -24,12 +24,12 @@ public class InfoMenu extends Menu {
 		              + "\n"
 		              + "      Crediti\n"
 		              + "\n"
-		              + "Programmazione:\n"
-		              + "Grafiche:\n"
-		              + "Musica e suoni:\n"
-		              + "Livelli:\n"
-		              + "Testo:\n"
-		              + "Test:\n";
+		              + "Programmazione: Rusponi Rocco\n"
+//		              + "Grafiche:\n"
+		              + "Musica e suoni: Campo Hermann\n"
+		              + "Livelli: Oliva Elisabet\n"
+		              + "Testo: Brigadeci Ludovica, Barone Elisea\n"
+		              + "Game Tester: Cammalleri Francesco, Pappalardo Francesco\n";
 
 		screen.setFont(Screen.FONT_X3);
 		screen.write(text, 0xffffff, 16, 16);

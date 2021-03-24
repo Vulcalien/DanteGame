@@ -37,7 +37,6 @@ public class StartMenu extends Menu {
 					case ID_START:
 						Game.overlay = new TransitionOverlay(240, 0x000000, () -> {
 							Game.menu = null;
-							// TODO start level 1
 						});
 						starting = true;
 						break;

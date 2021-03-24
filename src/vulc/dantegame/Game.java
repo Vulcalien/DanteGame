@@ -56,7 +56,6 @@ public abstract class Game {
 		level = Level.loadLevel(levelNumber);
 		player = level.player;
 
-		// DEBUG uncomment this
 		menu = new StartMenu();
 	}
 
@@ -105,9 +104,6 @@ public abstract class Game {
 	public static void main(String[] args) {
 		createFrame(false);
 		frame.setVisible(true);
-
-		// DEBUG
-		frame.setAlwaysOnTop(true);
 
 		init();
 		GameLoop.start();

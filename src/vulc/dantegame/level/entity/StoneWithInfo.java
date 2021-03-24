@@ -42,12 +42,14 @@ public class StoneWithInfo extends Entity {
 	}
 
 	public void render(Screen screen) {
-		screen.renderSprite(Atlas.STONE_WITH_INFO,
-		                    x - Atlas.STONE_WITH_INFO.width / 2, y - Atlas.STONE_WITH_INFO.height / 2);
+		// paper sheet
+		Atlas.drawTile(2, 5, screen,
+		               x - Level.T_SIZE / 2 - screen.xOffset,
+		               y - Level.T_SIZE / 2 - screen.yOffset);
 	}
 
 	public boolean blocks(Entity e) {
-		return true;
+		return false;
 	}
 
 }

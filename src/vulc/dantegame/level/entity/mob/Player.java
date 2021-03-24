@@ -13,7 +13,6 @@ import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.Entity;
 import vulc.dantegame.level.entity.ExitDoor;
-import vulc.dantegame.level.entity.StoneWithInfo;
 import vulc.dantegame.level.entity.TalkingPerson;
 import vulc.dantegame.level.entity.particle.TextParticle;
 import vulc.dantegame.level.tile.Tile;
@@ -103,7 +102,7 @@ public class Player extends Mob {
 		if(Game.overlay == null && !isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
-			int speed = 6; // DEBUG
+			int speed = 6;
 
 			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= 1;
 			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= 1;
@@ -122,6 +121,10 @@ public class Player extends Mob {
 
 			xm += xmIn;
 			ym += ymIn;
+
+			if(moveAnimation % 20 == 19) {
+				Sound.SAND.play();
+			}
 		}
 		move(xm, ym);
 	}
@@ -163,7 +166,6 @@ public class Player extends Mob {
 					door.open();
 				} else {
 					if(Game.ticks - lastSayNotTalked >= 180) {
-						// TODO find better text
 						level.addEntity(new TextParticle(180, x, y - 256, "Parla prima con il personaggio"));
 
 						lastSayNotTalked = Game.ticks;
@@ -183,7 +185,6 @@ public class Player extends Mob {
 
 	public boolean isBlockedBy(Entity e) {
 		if(e instanceof RollingRock) return true;
-		if(e instanceof StoneWithInfo) return true;
 		if(e instanceof TalkingPerson) return true;
 		if(e instanceof ExitDoor) return true;
 		return false;
@@ -214,11 +215,6 @@ public class Player extends Mob {
 	public void setCheckpoint(int x, int y) {
 		this.xCheckpoint = x;
 		this.yCheckpoint = y;
-	}
-
-	// DEBUG
-	public boolean ignoreSolidTiles() {
-		return false;
 	}
 
 }

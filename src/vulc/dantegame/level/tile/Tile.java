@@ -16,7 +16,7 @@ public class Tile {
 
 	public static final Tile GRASS_FLOOR = new SandTile(0);
 	public static final Tile DIRT_FLOOR = new Tile(1);
-	public static final Tile STONE_WALL = new WallTile(2);
+	public static final Tile STONE_WALL = new StoneTile(2);
 	public static final Tile VOID = new Tile(3);
 	public static final Tile CHECKPOINT = new CheckpointTile(24);
 

@@ -13,7 +13,6 @@ public class Sound {
 	public static final int TYPE_EFFECT = 1;
 
 	public static final boolean[] CHANNELS = {
-	    // DEBUG true,true
 	    true, true
 	};
 
@@ -21,6 +20,7 @@ public class Sound {
 
 	public static final Sound MENU_SOUND = new Sound("menu_sound", TYPE_EFFECT);
 	public static final Sound CHECKPOINT = new Sound("checkpoint", TYPE_EFFECT);
+	public static final Sound SAND = new Sound("sand", TYPE_EFFECT);
 
 	private Clip clip;
 	private final int type;
