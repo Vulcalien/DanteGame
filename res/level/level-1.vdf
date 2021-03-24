@@ -1,6 +1,6 @@
 {
     obj "stone-text": {
-        string "1": "Benvenuto nel purgatorio viaggiatore!\nUsa -WASD- per muoverti.",
+        string "1": "Benvenuto nel Purgatorio viaggiatore!\nUsa -WASD- per muoverti.",
         string "2": "Il tuo obiettivo e' quello di parlare ai\npersonaggi del Purgatorio, cosi' da poter\nscrivere la Divina Commedia.",
         string "3": "Attenzione pero'! Ci sono degli ostacoli lungo\nla via. Evitali e raggiungi il personaggio\ncon cui parlare.",
         string "4": "Ora sali sul checkpoint per impostare il\npunto di rinascita.",
@@ -11,6 +11,6 @@
         string "9": "Hai completato il tutorial!\nOra parla a Virgilio (avvicinati e\npremi 'E') e poi raggiungi la porta per\npassare al livello successivo."
     },
     string[] "person-text": [
-        "",
+        "Figliuol, segui i miei passi:\nvolgianci in dietro, che' di qua dichina\nquesta pianura a' suoi termini bassi",
     ]
 }
