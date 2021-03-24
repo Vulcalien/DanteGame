@@ -32,9 +32,10 @@ public final class Atlas {
 			TILES = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/atlas.png")));
 
 			// entiites
-			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/dante.png")));
-			VIRGILIO = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/virgilio.png")));
-			CATONE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/catone.png")));
+			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/characters/dante.png")));
+			VIRGILIO = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/characters/virgilio.png")));
+			CATONE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/characters/catone.png")));
+
 			ROLLING_ROCK = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/rolling_rock.png")));
 			MOVING_PLATFORM =
 			        new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/moving_platform.png")));

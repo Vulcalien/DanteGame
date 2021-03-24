@@ -4,7 +4,6 @@ import static vulc.dantegame.input.KeyBindings.*;
 
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
-import vulc.dantegame.gfx.sprite.Atlas;
 
 public class StartMenu extends Menu {
 
@@ -51,7 +50,18 @@ public class StartMenu extends Menu {
 	}
 
 	public void render(Screen screen) {
-		screen.draw(Atlas.START_IMAGE, 0, 0);
+//		screen.draw(Atlas.START_IMAGE, 0, 0);
+		screen.clear(0x999999);
+
+		screen.setFont(Screen.BIGGEST_FONT);
+		String text = Game.GAME_NAME;
+		screen.write(text, 0x333333,
+		             (screen.width - screen.getFont().widthOf(text)) / 2 + 4,
+		             (screen.height - screen.getFont().getHeight()) / 3 + 4);
+		screen.write(text, 0x000000,
+		             (screen.width - screen.getFont().widthOf(text)) / 2,
+		             (screen.height - screen.getFont().getHeight()) / 3);
+		screen.setFont(Screen.NORMAL_FONT);
 
 		int xcenter = screen.width / 2;
 		int ycenter = screen.height / 2;

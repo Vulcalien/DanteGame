@@ -17,14 +17,14 @@ public class ExitDoor extends Entity {
 	}
 
 	public void render(Screen screen) {
-		Atlas.drawTile(3, 3, 2, 4, screen,
-		               x - xr - screen.xOffset,
-		               y - yr - screen.yOffset);
 		if(!open) {
 			Atlas.drawTile(5, 3, 2, 4, screen,
 			               x - xr - screen.xOffset,
 			               y - yr - screen.yOffset);
 		}
+		Atlas.drawTile(3, 3, 2, 4, screen,
+		               x - xr - screen.xOffset,
+		               y - yr - screen.yOffset);
 	}
 
 	public boolean blocks(Entity e) {

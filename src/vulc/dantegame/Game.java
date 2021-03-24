@@ -10,10 +10,8 @@ package vulc.dantegame;
 import vulc.dantegame.gfx.GameFrame;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.Menu;
-import vulc.dantegame.gfx.menu.PauseMenu;
 import vulc.dantegame.gfx.menu.StartMenu;
 import vulc.dantegame.input.InputHandler;
-import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
 import vulc.dantegame.level.entity.mob.Player;
 import vulc.dantegame.level.tile.Tile;
@@ -32,7 +30,7 @@ public abstract class Game {
 
 	public static final double SCREEN_RATIO = 1.0 * WIDTH / HEIGHT;
 
-	public static final String GAME_NAME = "Dante Game - by...";
+	public static final String GAME_NAME = "The Game of Dante";
 
 	protected static GameFrame frame;
 
@@ -65,9 +63,9 @@ public abstract class Game {
 		if(menu != null) {
 			menu.tick();
 		} else {
-			if(KeyBindings.ESCAPE.pressed()) {
-				menu = new PauseMenu();
-			}
+//			if(KeyBindings.ESCAPE.pressed()) {
+//				menu = new PauseMenu();
+//			}
 		}
 
 		if(level != null && (menu == null || !menu.preventsLevelTick())) {
@@ -97,7 +95,8 @@ public abstract class Game {
 
 	private static void createFrame(boolean isFullScreen) {
 		if(frame != null) frame.destroyFrame();
-		frame = new GameFrame("game name", WIDTH, HEIGHT, SCALE, isFullScreen);
+		frame = new GameFrame(GAME_NAME + " - 4BA - 2020/2021 - Liceo Vittorini Gela",
+		                      WIDTH, HEIGHT, SCALE, isFullScreen);
 		frame.initFrame();
 	}
 

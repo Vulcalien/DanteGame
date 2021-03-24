@@ -41,11 +41,12 @@ public class RollingRock extends Mob {
 	}
 
 	public void render(Screen screen) {
-		screen.renderSprite(Atlas.ROLLING_ROCK.getRotated(animation / 6),
+		screen.renderSprite(Atlas.ROLLING_ROCK.getRotated(animation / 6 % 2 * 2),
 		                    x - Atlas.ROLLING_ROCK.width / 2, y - Atlas.ROLLING_ROCK.height / 2);
 	}
 
 	public void touchedBy(Entity e) {
+		// TODO touched
 	}
 
 	public boolean blocks(Entity e) {
