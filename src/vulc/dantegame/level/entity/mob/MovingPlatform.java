@@ -10,6 +10,7 @@ public class MovingPlatform extends Mob {
 	private final int speed;
 
 	private int currentSpot = 0;
+	public int waiting = 0;
 
 	public MovingPlatform(int xt0, int yt0, int speed, int[] spots) {
 		this.x = Level.tileToPos(xt0);
@@ -23,6 +24,11 @@ public class MovingPlatform extends Mob {
 	}
 
 	public void tick() {
+		if(waiting > 0) {
+			waiting--;
+			return;
+		}
+
 		move(xmGet(), ymGet());
 
 		int x1 = Level.tileToPos(spots[currentSpot * 2]);
@@ -31,6 +37,8 @@ public class MovingPlatform extends Mob {
 		if(x == x1 && y == y1) {
 			currentSpot++;
 			currentSpot %= spots.length / 2;
+
+			waiting = 40;
 		}
 	}
 

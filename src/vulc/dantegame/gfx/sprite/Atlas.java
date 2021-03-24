@@ -21,6 +21,7 @@ public final class Atlas {
 
 	// entities
 	public static final Bitmap<Integer> PLAYER;
+	public static final Bitmap<Integer> VIRGILIO;
 	public static final Bitmap<Integer> CATONE;
 	public static final Bitmap<Integer> ROLLING_ROCK;
 	public static final Bitmap<Integer> MOVING_PLATFORM;
@@ -32,6 +33,7 @@ public final class Atlas {
 
 			// entiites
 			PLAYER = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/dante.png")));
+			VIRGILIO = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/virgilio.png")));
 			CATONE = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/catone.png")));
 			ROLLING_ROCK = new IntBitmap(ImageIO.read(Atlas.class.getResourceAsStream("/gfx/rolling_rock.png")));
 			MOVING_PLATFORM =

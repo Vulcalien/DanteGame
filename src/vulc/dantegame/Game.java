@@ -11,6 +11,7 @@ import vulc.dantegame.gfx.GameFrame;
 import vulc.dantegame.gfx.Screen;
 import vulc.dantegame.gfx.menu.Menu;
 import vulc.dantegame.gfx.menu.PauseMenu;
+import vulc.dantegame.gfx.menu.StartMenu;
 import vulc.dantegame.input.InputHandler;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
@@ -38,7 +39,7 @@ public abstract class Game {
 	public static final InputHandler INPUT = new InputHandler();
 
 	public static Level level;
-	public static int levelNumber;
+	public static int levelNumber = 1;
 	public static Player player;
 
 	public static Menu menu;
@@ -52,11 +53,11 @@ public abstract class Game {
 			Sound.THEME.loop();
 		}).start();
 
-		level = Level.loadLevel(1);
+		level = Level.loadLevel(levelNumber);
 		player = level.player;
 
 		// DEBUG uncomment this
-//		menu = new StartMenu();
+		menu = new StartMenu();
 	}
 
 	public static void tick() {

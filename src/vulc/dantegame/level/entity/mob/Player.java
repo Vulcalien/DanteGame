@@ -6,6 +6,8 @@ import vulc.bitmap.Bitmap;
 import vulc.bitmap.IntBitmap;
 import vulc.dantegame.Game;
 import vulc.dantegame.gfx.Screen;
+import vulc.dantegame.gfx.menu.GameOverMenu;
+import vulc.dantegame.gfx.menu.TransitionOverlay;
 import vulc.dantegame.gfx.sprite.Atlas;
 import vulc.dantegame.input.KeyBindings;
 import vulc.dantegame.level.Level;
@@ -24,6 +26,8 @@ public class Player extends Mob {
 
 	public boolean isTalking = false;
 	private boolean hasTalked = false;
+
+	private boolean switchingLevel = false;
 
 	public int xCheckpoint, yCheckpoint;
 	public int lastSayNotTalked = -Integer.MAX_VALUE / 2;
@@ -67,7 +71,7 @@ public class Player extends Mob {
 				break;
 			}
 		}
-		if(platform != null) {
+		if(platform != null && platform.waiting <= 0) {
 			xm += platform.xmGet();
 			ym += platform.ymGet();
 		}
@@ -99,7 +103,7 @@ public class Player extends Mob {
 		if(Game.overlay == null && !isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
-			int speed = 6;
+			int speed = 6 * 5; // DEBUG
 
 			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= 1;
 			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= 1;
@@ -189,14 +193,20 @@ public class Player extends Mob {
 		if(e instanceof RollingRock) {
 			level.onPlayerDeath();
 		} else if(e instanceof ExitDoor) {
-			if(hasTalked) {
+			ExitDoor door = (ExitDoor) e;
+			if(hasTalked && !switchingLevel && door.open) {
 				Game.levelNumber++;
-				try {
-					Level.loadLevel(Game.levelNumber);
-				} catch(RuntimeException ex) {
-					// TODO
-					System.out.println("Game Over");
-				}
+				switchingLevel = true;
+				Game.overlay = new TransitionOverlay(240, 0x000000, () -> {
+					try {
+						Game.level = Level.loadLevel(Game.levelNumber);
+						Game.player = Game.level.player;
+					} catch(RuntimeException ex) {
+						Game.menu = new GameOverMenu();
+						Game.level = null;
+						Game.player = null;
+					}
+				});
 			}
 		}
 	}

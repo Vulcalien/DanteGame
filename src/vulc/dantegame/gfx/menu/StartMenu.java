@@ -10,11 +10,11 @@ public class StartMenu extends Menu {
 
 	private static final int UNLOCK_GUI_TIME = 60;
 
-	private static final int GUI_BUTTONS = 3;
+	private static final int GUI_BUTTONS = 2;
 	private static final int ID_INFO = 0;
 	private static final int ID_START = 1;
 
-	private int animation = 0;
+	private int animation;
 
 	private int selected;
 
@@ -22,15 +22,17 @@ public class StartMenu extends Menu {
 
 	public StartMenu() {
 		selected = 1;
+		animation = Game.menu == null ? 0 : UNLOCK_GUI_TIME * 5;
 	}
 
 	public void tick() {
 		animation++;
 
 		if(!starting && animation >= UNLOCK_GUI_TIME) {
-			if(ENTER.released()) {
+			if(ENTER.pressed()) {
 				switch(selected) {
 					case ID_INFO:
+						Game.menu = new InfoMenu(true);
 						break;
 					case ID_START:
 						Game.overlay = new TransitionOverlay(240, 0x000000, () -> {

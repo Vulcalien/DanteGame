@@ -6,7 +6,7 @@ import vulc.dantegame.level.Level;
 
 public class ExitDoor extends Entity {
 
-	private boolean open = false;
+	public boolean open = false;
 
 	public ExitDoor(int xt, int yt) {
 		xr = 64;
@@ -20,9 +20,7 @@ public class ExitDoor extends Entity {
 		Atlas.drawTile(3, 3, 2, 4, screen,
 		               x - xr - screen.xOffset,
 		               y - yr - screen.yOffset);
-		if(open) {
-
-		} else {
+		if(!open) {
 			Atlas.drawTile(5, 3, 2, 4, screen,
 			               x - xr - screen.xOffset,
 			               y - yr - screen.yOffset);
