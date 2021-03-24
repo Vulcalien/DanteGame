@@ -164,7 +164,7 @@ public class Player extends Mob {
 				} else {
 					if(Game.ticks - lastSayNotTalked >= 180) {
 						// TODO find better text
-						level.addEntity(new TextParticle(180, x, y - 256, "Parla prima..."));
+						level.addEntity(new TextParticle(180, x, y - 256, "Parla prima con il personaggio"));
 
 						lastSayNotTalked = Game.ticks;
 					}

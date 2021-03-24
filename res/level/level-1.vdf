@@ -4,16 +4,13 @@
         string "2": "Il tuo obiettivo e' quello di parlare ai\npersonaggi del Purgatorio, cosi' da poter\nscrivere la Divina Commedia.",
         string "3": "Attenzione pero'! Ci sono degli ostacoli lungo\nla via. Evitali e raggiungi il personaggio\ncon cui parlare.",
         string "4": "Ora sali sul checkpoint per impostare il\npunto di rinascita.",
-        string "5": "Stai attento a non cadere in quelle quei fossi.\nSe cadi, tornerai al checkpoint.",
+        string "5": "Stai attento a non cadere in quei fossi.\nSe cadi, tornerai al checkpoint.",
         string "6": "Molto bene, raggiungi il checkpoint.",
         string "7": "Per superare questo fosso, dovrai salire\nsu quella piattaforma mobile.",
         string "8": "Il prossimo ostacolo sono le rocce.\nNon farti colpire!",
         string "9": "Hai completato il tutorial!\nOra parla a Virgilio (avvicinati e\npremi 'E') e poi raggiungi la porta per\npassare al livello successivo."
     },
     string[] "person-text": [
-        "TEST0",
-        "TEST1",
-        "TEST2",
-        "TEST54",
+        "",
     ]
 }

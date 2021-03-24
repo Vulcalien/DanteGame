@@ -79,11 +79,10 @@ public abstract class Game {
 
 		if(overlay != null) overlay.tick();
 
-		// DEBUG
-		if(KeyBindings.F11.released()) {
-			createFrame(!frame.isFullScreen);
-			frame.setVisible(true);
-		}
+//		if(KeyBindings.F11.released()) {
+//			createFrame(!frame.isFullScreen);
+//			frame.setVisible(true);
+//		}
 	}
 
 	public static void render(Screen screen) {

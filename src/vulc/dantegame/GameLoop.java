@@ -6,6 +6,7 @@ package vulc.dantegame;
 public class GameLoop {
 
 	private static Thread thread;
+	private static Thread renderThread;
 	private static boolean running = false;
 
 	public static void start() {
@@ -20,17 +21,23 @@ public class GameLoop {
 		running = false;
 		try {
 			thread.join();
+			renderThread.join();
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
+	private static int ticks = 0, fps = 0;
+
 	public static void run() {
 		int ticksPerSecond = 60;
-		int ticks = 0, fps = 0;
+		int framesPerSecond = 30;
 
 		long nanosPerTick = 1_000_000_000 / ticksPerSecond;
+		long nanosPerFrame = 1_000_000_000 / framesPerSecond;
+
 		long unprocessedNanos = 0;
+		long unrenderedNanos = 0;
 		long lastTime = System.nanoTime();
 
 		while(running) {
@@ -42,6 +49,7 @@ public class GameLoop {
 			if(passedTime > 1_000_000_000) passedTime = 1_000_000_000;
 
 			unprocessedNanos += passedTime;
+			unrenderedNanos += passedTime;
 
 			boolean ticked = false;
 			while(unprocessedNanos >= nanosPerTick) {
@@ -57,7 +65,9 @@ public class GameLoop {
 				}
 			}
 
-			if(ticked) {
+			if(ticked && unrenderedNanos >= nanosPerFrame) {
+				unrenderedNanos %= nanosPerFrame;
+
 				Game.frame.render();
 				fps++;
 			}

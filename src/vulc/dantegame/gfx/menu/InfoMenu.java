@@ -35,10 +35,12 @@ public class InfoMenu extends Menu {
 		screen.write(text, 0xffffff, 16, 16);
 		screen.setFont(Screen.NORMAL_FONT);
 
-		text = " Premi ENTER per tornare al menu principale";
-		screen.write(text, 0xffffff, 0xaa,
-		             screen.width - screen.getFont().widthOf(text) - 5,
-		             screen.height - screen.getFont().getHeight() - 5);
+		if(startup) {
+			text = " Premi ENTER per tornare al menu principale";
+			screen.write(text, 0xffffff, 0xaa,
+			             screen.width - screen.getFont().widthOf(text) - 5,
+			             screen.height - screen.getFont().getHeight() - 5);
+		}
 	}
 
 }

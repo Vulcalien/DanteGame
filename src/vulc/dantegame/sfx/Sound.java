@@ -14,7 +14,7 @@ public class Sound {
 
 	public static final boolean[] CHANNELS = {
 	    // DEBUG true,true
-	    false, true
+	    true, true
 	};
 
 	public static final Sound THEME = new Sound("theme", TYPE_MUSIC);
