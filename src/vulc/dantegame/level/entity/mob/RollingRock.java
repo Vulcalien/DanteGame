@@ -46,7 +46,6 @@ public class RollingRock extends Mob {
 	}
 
 	public void touchedBy(Entity e) {
-		// TODO touched
 	}
 
 	public boolean blocks(Entity e) {
