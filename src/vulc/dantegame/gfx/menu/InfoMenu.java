@@ -19,7 +19,6 @@ public class InfoMenu extends Menu {
 	}
 
 	public void render(Screen screen) {
-
 		String text = "Videogioco fatto per il Dantedi' 2021\n"
 		              + "dalla classe 4BA Liceo Vittorini Gela\n"
 		              + "\n"

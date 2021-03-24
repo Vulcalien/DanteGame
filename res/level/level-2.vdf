@@ -10,9 +10,7 @@
         string "8": "Venimmo poi in sul lito diserto,\nche mai non vide navicar sue acque\nomo, che di tornar sia poscia esperto"
     },
     string[] "person-text": [
-        "TEST0",
-        "TEST1",
-        "TEST2",
-        "TEST54",
+        "Chi v'ha guidati, o che vi fu lucerna,\nuscendo fuor de la profonda notte\nche sempre nera fa la valle inferna?",
+        "Son le leggi d'abisso cosi' rotte?\no e' mutato in ciel novo consiglio,\nche, dannati, venite a le mie grotte?",
     ]
 }

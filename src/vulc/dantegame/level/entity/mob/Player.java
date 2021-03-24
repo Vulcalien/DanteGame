@@ -103,7 +103,7 @@ public class Player extends Mob {
 		if(Game.overlay == null && !isTalking) {
 			// xm and ym requested by input
 			int xmIn = 0, ymIn = 0;
-			int speed = 6 * 5; // DEBUG
+			int speed = 6; // DEBUG
 
 			if(KeyBindings.W.down() || KeyBindings.UP.down()) ymIn -= 1;
 			if(KeyBindings.A.down() || KeyBindings.LEFT.down()) xmIn -= 1;
@@ -201,7 +201,7 @@ public class Player extends Mob {
 					try {
 						Game.level = Level.loadLevel(Game.levelNumber);
 						Game.player = Game.level.player;
-					} catch(RuntimeException ex) {
+					} catch(Exception ex) {
 						Game.menu = new GameOverMenu();
 						Game.level = null;
 						Game.player = null;
@@ -218,7 +218,7 @@ public class Player extends Mob {
 
 	// DEBUG
 	public boolean ignoreSolidTiles() {
-		return true;
+		return false;
 	}
 
 }
