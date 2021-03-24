@@ -104,6 +104,7 @@ public class GameFrame extends Frame {
 		Game.render(screen);
 
 		Graphics g = bs.getDrawGraphics();
+		g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); // this should fix flickering on the gray bars
 		g.drawImage(img, xRend, yRend, wRend, hRend, null);
 		g.dispose();
 		bs.show();

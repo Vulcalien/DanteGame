@@ -8,7 +8,8 @@ public final class KeyBindings {
 	private KeyBindings() {
 	}
 
-	public static final InputHandler.Key DEBUG = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_9);
+	public static final InputHandler.Key ESCAPE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ESCAPE);
+	public static final InputHandler.Key F11 = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_F11);
 
 	public static final InputHandler.Key W = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_W);
 	public static final InputHandler.Key A = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_A);
@@ -22,9 +23,6 @@ public final class KeyBindings {
 
 	public static final InputHandler.Key ENTER = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ENTER);
 	public static final InputHandler.Key SPACE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_SPACE);
-
-	public static final InputHandler.Key ESCAPE = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_ESCAPE);
-
 	public static final InputHandler.Key E = Game.INPUT.new Key(InputHandler.KEYBOARD, KeyEvent.VK_E);
 
 }

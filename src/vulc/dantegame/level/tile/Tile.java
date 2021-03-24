@@ -14,7 +14,7 @@ public class Tile {
 
 	public static final Tile[] TILES = new Tile[128];
 
-	public static final Tile GRASS_FLOOR = new Tile(0);
+	public static final Tile GRASS_FLOOR = new SandTile(0);
 	public static final Tile DIRT_FLOOR = new Tile(1);
 	public static final Tile STONE_WALL = new WallTile(2);
 	public static final Tile VOID = new Tile(3);

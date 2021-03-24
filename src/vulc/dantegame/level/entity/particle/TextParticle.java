@@ -23,7 +23,7 @@ public class TextParticle extends Particle {
 		int padding = screen.getFont().getHeight() / 2;
 		int height = screen.getFont().getHeight();
 		for(int i = 0; i < text.length(); i++) {
-			if(text.charAt(i) == '\n') height += screen.getFont().getHeight();
+			if(text.charAt(i) == '\n') height += screen.getFont().getHeight() + screen.getFont().getLineSpacing();
 		}
 
 		screen.fill(-screen.xOffset + x - screen.getFont().widthOf(text) / 2 - padding,

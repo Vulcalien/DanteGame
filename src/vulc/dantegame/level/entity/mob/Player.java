@@ -206,4 +206,9 @@ public class Player extends Mob {
 		this.yCheckpoint = y;
 	}
 
+	// DEBUG
+	public boolean ignoreSolidTiles() {
+		return true;
+	}
+
 }

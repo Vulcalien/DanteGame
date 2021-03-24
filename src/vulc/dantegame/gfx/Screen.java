@@ -24,16 +24,6 @@ public class Screen extends IntBitmap {
 		setFont(NORMAL_FONT);
 	}
 
-	public Bitmap<Integer> getCopy() {
-		Bitmap<Integer> result = new IntBitmap(width, height);
-
-		int size = size();
-		for(int i = 0; i < size; i++) {
-			result.raster.setPixel(i, raster.getPixel(i));
-		}
-		return result;
-	}
-
 	public void setOffset(int x, int y) {
 		this.xOffset = x;
 		this.yOffset = y;

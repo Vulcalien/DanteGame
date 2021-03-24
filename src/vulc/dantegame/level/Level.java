@@ -117,12 +117,12 @@ public class Level {
 		int yt1 = yt0 + yTiles - 1 + 4;
 
 		for(int yt = yt0; yt <= yt1; yt++) {
-			if(yt < 0 || yt >= height) continue;
-
 			for(int xt = xt0; xt <= xt1; xt++) {
-				if(xt < 0 || xt >= width) continue;
-
-				getTile(xt, yt).render(screen, this, xt, yt);
+				if(xt < 0 || xt >= width || yt < 0 || yt >= height) {
+					Tile.GRASS_FLOOR.render(screen, this, xt, yt);
+				} else {
+					getTile(xt, yt).render(screen, this, xt, yt);
+				}
 			}
 		}
 
@@ -229,6 +229,10 @@ public class Level {
 	protected void onPlayerDeathAction() {
 		player.x = player.xCheckpoint;
 		player.y = player.yCheckpoint;
+
+		removeEntityFromTile(player, posToTile(player.y), posToTile(player.y));
+		player.dir = 2;
+		insertEntityInTile(player, posToTile(player.x), posToTile(player.y));
 	}
 
 	public static Level loadLevel(int id) {

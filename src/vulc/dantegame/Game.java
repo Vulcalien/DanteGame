@@ -52,7 +52,7 @@ public abstract class Game {
 			Sound.THEME.loop();
 		}).start();
 
-		level = Level.loadLevel(2);
+		level = Level.loadLevel(1);
 		player = level.player;
 
 		// DEBUG uncomment this
@@ -79,7 +79,7 @@ public abstract class Game {
 		if(overlay != null) overlay.tick();
 
 		// DEBUG
-		if(KeyBindings.DEBUG.released()) {
+		if(KeyBindings.F11.released()) {
 			createFrame(!frame.isFullScreen);
 			frame.setVisible(true);
 		}
